@@ -20,36 +20,39 @@
             <!--   LEFT SIDE MAIN POSTS  -->
 
             <section class="col-lg-7">
-            <?php
+                <?php
 
-            // Getting the search query and removing extra spaces
-            $query = isset($_GET['query']) ? trim($_GET['query']) : '';
+                // Getting the search query and removing extra spaces
+                $query = isset($_GET['query']) ? trim($_GET['query']) : '';
 
-            if (!empty($query)) {
-                //Removing Escape characters (For Safety)
-                $query = $conn->real_escape_string($query);
-                    
-                // Breaking the search query into keywords
-                $keywords = explode(" ", $query);
-                
-                // Build search condition
-                $searchConditions = [];
-                foreach ($keywords as $word) {
-                    $searchConditions[] = " `title` LIKE '%$word%' OR `description` LIKE '%$word%'";
-                }
-                
-                $sel_sql = "SELECT * FROM posts WHERE " . implode(" OR ", $searchConditions) . " ORDER BY 
+                if (!empty($query)) {
+                    //Removing Escape characters (For Safety)
+                    $query = $conn->real_escape_string($query);
+
+                    // Breaking the search query into keywords
+                    $keywords = explode(" ", $query);
+
+                    // Build search condition
+                    $searchConditions = [];
+                    foreach ($keywords as $word) {
+                        $searchConditions[] = " `title` LIKE '%$word%' OR `description` LIKE '%$word%'";
+                    }
+
+                    $query = "SELECT * FROM posts WHERE " . implode(" OR ", $searchConditions) . " ORDER BY 
                             (CASE WHEN `title` LIKE '%$query%' THEN 3
                                   WHEN `description` LIKE '%$query%' THEN 2
                                   ELSE 1 END) DESC";
-                
-                $runs_sql = mysqli_query($conn, $sel_sql);
 
-                
-                if($runs_sql->num_rows > 0 ){
-                    // Matching post found
-                    while ($row = mysqli_fetch_assoc($runs_sql)) {
-                        echo '<div class="card">
+                    // Executing the mysql query
+                    $result = mysqli_query($conn, $query);
+
+
+                    // Checking number of rows obtained from database
+                    if ($result->num_rows > 0) {
+                        // Matching post found
+                        // Fetching each row in loop from result
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<div class="card">
                                 <div class="card-header">
                                             <strong>' . $row['title'] . '</strong>
                                         </div>
@@ -72,18 +75,16 @@
                                     </div>
     
                                 </div>';
+                        }
+                    } else {
+                        echo 'No Matching Post Found';
                     }
+                } else {
+                    // No valid Query, So, Redirect to the home page
+                    header("Location: index.php");
+                    exit;
                 }
-                else {
-                    echo 'No Matching Post Found';
-                }
-            }
-            else {
-                // No valid Query, So, Redirect to the home page
-                header("Location: index.php");
-                exit;
-            }
-            ?>
+                ?>
             </section>
 
 
@@ -161,5 +162,3 @@
 </body>
 
 </html>
-
-

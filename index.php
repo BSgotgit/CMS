@@ -27,38 +27,39 @@
                 // Checking if Category is Selected or Not (in menubar)
 
                 if (isset($_GET['cate'])) {
-                    $sel_sql = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
+                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
                 } else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
-                    $sel_sql = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";
+                    $query = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";
                 }
 
-                $runs_sql = mysqli_query($conn, $sel_sql);
+                // Executing the mysql query
+                $result = mysqli_query($conn, $query);
 
-                while ($row = mysqli_fetch_assoc($runs_sql)) {
+                // Fetching/getting each record/row in loop from result set
+                while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="card">
                             <div class="card-header">
-                                        <strong>' . $row['title'] . '</strong>
-                                    </div>
-                                <div class="card-body">
+                                <strong>' . $row['title'] . '</strong>
+                            </div>
 
-                                    <div class="row">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="col-lg-9">
-                                    <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
+                                        img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
                                     </div>
                                     <div class="col-lg-12">
-                                    <p class="card-text">' . substr($row['description'], 0, 150) . '..... 
-                                        </p>
+                                        <p class="card-text">' . substr($row['description'], 0, 150) . '..... </p>
                                     </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class=""></div>
-                                        <div class=""> <a href="readpost.php?pstd=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
-                                    </div>
-
                                 </div>
 
-                            </div>';
+                                <div class="row">
+                                    <div class=""> <a href="readpost.php?pstd=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
+                                </div>
+
+                            </div>
+
+                        </div>';
                 }
                 ?>
             </section>
