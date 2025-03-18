@@ -53,7 +53,7 @@ while($rows=mysqli_fetch_assoc($runs_sql))
         </section>
 
         <aside class="col-lg-5">
-       <form role="form"action="">
+       <form role="form"action="search.php" method="get">
         <div class="card">
 
             <div class="card-header">Search Something</div>
@@ -74,7 +74,7 @@ while($rows=mysqli_fetch_assoc($runs_sql))
         </div>
        </form>
 
-       <form role="form" action="">
+       <form role="form" action="" >
         <div class="card">
                 <div class=" card-header">
             Login Area

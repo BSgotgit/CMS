@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>CMS System</title>
+    <title>CMS</title>
     <script src="jQry/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
@@ -18,61 +18,74 @@
 
     <div class="container">
         <div class="row">
+
+
+            <!--   LEFT SIDE MAIN POSTS  -->
+
             <section class="col-lg-7">
                 <?php
-                $sel_sql = "select * from posts where category='$_GET[cate]'";
+                if(isset($_GET['cate'])) $sel_sql = "select * from posts where category='$_GET[cate]'";  // CATEGORY
+                else $sel_sql = "select * from posts";         // HOME
+
                 $runs_sql = mysqli_query($conn, $sel_sql);
-                while ($rows = mysqli_fetch_assoc($runs_sql)) {
+
+                while ($row = mysqli_fetch_assoc($runs_sql)) {
                     echo '<div class="card">
                             <div class="card-header">
-                                        <strong>' . $rows['title'] . '</strong>
+                                        <strong>' . $row['title'] . '</strong>
                                     </div>
                                 <div class="card-body">
 
                                     <div class="row">
                                     <div class="col-lg-9">
-                                    <img src=" ' . $rows['image'] . '" width="100%" alt="..." class="">
+                                    <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
                                     </div>
                                     <div class="col-lg-12">
-                                    <p class="card-text">' . substr($rows['description'], 0, 150) . '..... 
+                                    <p class="card-text">' . substr($row['description'], 0, 150) . '..... 
                                         </p>
                                     </div>
                                     </div>
                                     <div class="row">
                                         <div class=""></div>
-                                        <div class=""> <a href="readpost.php?pstd=' . $rows['post_id'] . '" class="btn btn-secondary">Read More</a></div>
+                                        <div class=""> <a href="readpost.php?pstd=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
                                     </div>
 
                                 </div>
 
                             </div>';
                 }
-
                 ?>
-                
             </section>
 
+
+            <!--   RIGHT SIDE CONTENTS  -->
+
             <aside class="col-lg-5">
-                <form role="form" action="">
+
+                <!--     SEARCH BOX  -->
+
+                <form role="form" action="search.php" method="get">
                     <div class="card">
 
                         <div class="card-header">Search Something</div>
 
                         <div class="card-body">
-
                             <div class="row mb-2">
                                 <div class="input-group">
-                                    <input type="search" class="form-control" id="username"
-                                        placeholder="Search something">
+                                    <input type="search" class="form-control" name="query" placeholder="Search something">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i
-                                                class="bi bi-search"></i></button>
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
+
+
+                <!--    LOGIN FORM  -->
 
                 <form role="form" action="">
                     <div class="card">
@@ -104,6 +117,9 @@
                     </div>
                 </form>
 
+
+                <!--     HIGHLIGHTED POSTS  -->
+
                 <div class="list-group">
                     <a href="" class="list-group-item">
                         <h4 class="list-group-item-heading">Post1</h4>
@@ -123,6 +139,7 @@
                     </a>
                 </div>
             </aside>
+
         </div>
 </body>
 
