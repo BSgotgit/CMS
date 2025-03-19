@@ -23,13 +23,13 @@
 
                 // TO DELETE POST
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['del_post_id'])) {
-                    
+
                     $post_id = $_POST['del_post_id'];
                     $query = "DELETE FROM `posts` WHERE `post_id` = '{$post_id}'";
                     $result = mysqli_query($conn, $query);
 
                     // Checking if row inserted
-                    if ($conn->affected_rows > 0) {
+                    if ($conn->affected_row > 0) {
                         echo '
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 Post Deleted Successfully.
@@ -71,12 +71,12 @@
                                     <div class="d-flex ms-3">
     
                                         <form action="manageposts.php" method="POST" class="me-2">
-                                            <input type="hidden" name="del_post_id" value= '. $row['post_id'].'">
+                                            <input type="hidden" name="del_post_id" value= ' . $row['post_id'] . '">
                                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center">Delete</button>
                                         </form>
 
                                         <form action="editpost.php" method="GET" class="me-2">
-                                            <input type="hidden" name="pid" value= '. $row['post_id'].'">
+                                            <input type="hidden" name="pid" value= ' . $row['post_id'] . '">
                                             <button type="submit" class="btn btn-secondary btn-sm d-flex align-items-center">Edit</button>
                                         </form>
                                        
@@ -104,10 +104,10 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="input-group">
-                                    <input type="search" class="form-control" name="query" placeholder="Search something">
+                                    <input type="search" class="form-control" name="query" placeholder="">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
-                                            <!-- TODO add icon -->
+                                            <img src="images/search-icon.png" style="max-width: 20px;"></img>
                                         </button>
                                     </div>
                                 </div>
@@ -116,9 +116,45 @@
                     </div>
                 </form>
 
-            </aside>
+
+                <!-- Filter Category -->
+
+                <div class="card">
+                    <div class="card-header">Filter Category</div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2">
+                            
+                            <?php
+                            $query = "SELECT DISTINCT `category` FROM posts";
+                            $result = mysqli_query($conn, $query);
+
+                            // Color classes
+                            $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                            $index = 0; // Index to track colors
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $colorClass = $colors[$index % count($colors)];
+                                $index++; // Moving to the next color
+
+                                echo '
+                                    <form action="manageposts.php" method="GET">
+                                       <input type="hidden" name="cate" value="' . $row['category'] . '">
+                                       <button type="submit" class="btn btn-' . $colorClass . ' btn-sm">' . $row['category'] . '</button>
+                                    </form>
+                                ';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+
 
         </div>
+
+        </aside>
+
+    </div>
 </body>
 
 </html>

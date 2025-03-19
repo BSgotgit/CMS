@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="row">
                                             <div class=""></div>
-                                            <div class=""> <a href="readpost.php?pstd=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
+                                            <div class=""> <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
                                         </div>
     
                                     </div>
@@ -104,10 +104,10 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="input-group">
-                                    <input type="search" class="form-control" name="query" placeholder="Search something">
+                                    <input type="search" class="form-control" name="query" placeholder="">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
-                                            <i class="bi bi-search"></i>
+                                            <img src="images/search-icon.png" style="max-width: 20px;"></img>
                                         </button>
                                     </div>
                                 </div>
