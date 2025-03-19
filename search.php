@@ -152,14 +152,27 @@
                 </form>
 
 
-                <!--     HIGHLIGHTED POSTS  -->
+                <!--    FEATURED / HIGHLIGHTED POSTS  -->
 
-                <div class="list-group">
-                    <a href="" class="list-group-item">
-                        <h4 class="list-group-item-heading">Post1</h4>
-                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                    </a>
-                </div>
+                <?php
+
+                $query = "SELECT `title`, `description` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 5 ";
+
+                //Executing the mysql query
+                $result = mysqli_query($conn, $query);
+
+                // Fetching/getting each record/row in loop from result set
+                while ($row = mysqli_fetch_assoc($result)) {
+                   echo '
+                       <div class="list-group">
+                       <a href="" class="list-group-item">
+                       <h4 class="list-group-item-heading"> '.$row['title'] .'</h4>
+                       <p class="list-group-item-text">'. substr($row['description'], 0, 230). '</p>
+                       </a>
+                       </div> </br>
+                   ';
+                }
+                ?>
             </aside>
 
         </div>
