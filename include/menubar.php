@@ -38,11 +38,14 @@ include 'include/dbconnect.php';
 
                 ?>
 
+    
+
+                <!-- Temporary -->
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Articles</a>
+                    <a class="nav-link" aria-current="page" href="newpost.php">New Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Contact Us</a>
+                    <a class="nav-link" aria-current="page" href="manageposts.php">Manage Posts</a>
                 </li>
             </ul>
         </div>
