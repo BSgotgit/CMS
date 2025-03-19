@@ -29,7 +29,7 @@
                     $result = mysqli_query($conn, $query);
 
                     // Checking if row inserted
-                    if ($conn->affected_row > 0) {
+                    if ($conn->affected_rows > 0) {
                         echo '
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 Post Deleted Successfully.
@@ -71,12 +71,12 @@
                                     <div class="d-flex ms-3">
     
                                         <form action="manageposts.php" method="POST" class="me-2">
-                                            <input type="hidden" name="del_post_id" value= ' . $row['post_id'] . '">
+                                            <input type="hidden" name="del_post_id" value= ' . $row['post_id'] . '>
                                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center">Delete</button>
                                         </form>
 
                                         <form action="editpost.php" method="GET" class="me-2">
-                                            <input type="hidden" name="pid" value= ' . $row['post_id'] . '">
+                                            <input type="hidden" name="pid" value= ' . $row['post_id'] . '>
                                             <button type="submit" class="btn btn-secondary btn-sm d-flex align-items-center">Edit</button>
                                         </form>
                                        
