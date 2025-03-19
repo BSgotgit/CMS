@@ -6,8 +6,6 @@
     <script src="bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-
-    <!-- TODO add an offline "search icon" -->
 </head>
 
 <body>
@@ -60,17 +58,17 @@
                     echo '
                     <div class="card mb-3 h-30">
                         <div class="card-header">
-                            <strong>' . htmlspecialchars($row['title']) . '</strong>
+                            <strong>' . $row['title'] . '</strong>
                         </div>
                         <div class="card-body d-flex flex-column">
                             <div class="row g-0">
                                 <div class="col-lg-4 col-md-5 col-12">
-                                    <img src="' . htmlspecialchars($row['image']) . '" class="img-fluid rounded" style="height: 170px; width: 100%; object-fit: cover;" alt="Post Image">
+                                    <img src="' . $row['image'] . '" class="img-fluid rounded" style="height: 170px; width: 100%; object-fit: cover;" alt="Post Image">
                                 </div>
                     
                                 <div class="col-lg-8 col-md-7 col-12 d-flex flex-column">
                                     <p class="card-text flex-grow-1 ms-3">' . substr($row['description'], 0, 190) . '...</p>
-                                    <p class="text-muted ms-3 mb-2">By ' . htmlspecialchars($row['author']) . '</p>
+                                    <p class="text-muted ms-3 mb-2">By ' . $row['author'] . '</p>
                                     
                                     <div class="d-flex ms-3">
     
