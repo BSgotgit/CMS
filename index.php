@@ -2,10 +2,8 @@
 
 <head>
     <title>CMS</title>
-    <script src="jQry/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="include/style.css">
+    <script src="include/script.js"></script>
 
     <!-- TODO add an offline "search icon" -->
 </head>

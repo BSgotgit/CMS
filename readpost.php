@@ -1,14 +1,9 @@
 <html>
 
 <head>
-    <title>CMS System</title>
-    <script src="jQry/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>CMS</title>
+    <link rel="stylesheet" href="include/style.css">
+    <script src="include/script.js"></script>
 </head>
 
 <body>

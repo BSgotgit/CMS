@@ -1,11 +1,9 @@
 <html>
 
 <head>
-    <title>CMS System</title>
-    <script src="jQry/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <title>CMS</title>
+    <link rel="stylesheet" href="include/style.css">
+    <script src="include/script.js"></script>
 </head>
 
 <body>
