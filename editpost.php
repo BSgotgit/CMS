@@ -39,13 +39,13 @@
                     if ($conn->affected_rows > 0) {
                         echo '
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> Post Updated Successfully.
+                            Post Updated Successfully.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     } else {
                         echo '
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Error!</strong> Unable to update post. Please try again.
+                            Post Not Updated.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     }
@@ -54,7 +54,7 @@
 
                 // TO EDIT POST 
 
-                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pid'])) {
+                elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pid'])) {
                     // Selecting only one post
                     $query = "SELECT * FROM `posts` WHERE post_id = '$_GET[pid]'";
                     $result = mysqli_query($conn, $query);
@@ -107,6 +107,7 @@
                         
                                    <div class="row mb-2">
                                        <div class="col-sm-8 offset-sm-4">
+                                            <input type="hidden" class="form-control" name="post_id" value="' . $row['post_id'] . '" required>
                                            <button type="submit" id="submit" class="btn btn-success btn-block">Update Post</button>
                                        </div>
                                    </div>
