@@ -18,7 +18,7 @@
             <?php
             // Selecting only one post
 
-            $sel_sql = "SELECT * FROM `posts` WHERE post_id = '$_GET[pstd]'";
+            $sel_sql = "SELECT * FROM `posts` WHERE post_id = '$_GET[pid]'";
             $runs_sql = mysqli_query($conn, $sel_sql);
             
             // Fetching single row

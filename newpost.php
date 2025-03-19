@@ -27,7 +27,7 @@
                     $image = 'image/'. $_POST['image'];
 
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}')";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 1)";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);

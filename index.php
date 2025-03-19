@@ -127,7 +127,7 @@
 
                 <?php
 
-                $query = "SELECT `title`, `description` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 5 ";
+                $query = "SELECT `post_id`,`title`, `description` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 5 ";
 
                 //Executing the mysql query
                 $result = mysqli_query($conn, $query);
@@ -136,7 +136,7 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                    echo '
                        <div class="list-group">
-                       <a href="" class="list-group-item">
+                       <a href="readpost.php?pid=' . $row['post_id'] . '" class="list-group-item">
                        <h4 class="list-group-item-heading"> '.$row['title'] .'</h4>
                        <p class="list-group-item-text">'. substr($row['description'], 0, 230). '</p>
                        </a>

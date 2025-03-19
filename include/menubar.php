@@ -1,7 +1,6 @@
 <?php
 //error_reporting(0);// This hides all error warnings.
 
-//include 'include/dbconn.php';
 include 'include/dbconnect.php';
 ?>
 

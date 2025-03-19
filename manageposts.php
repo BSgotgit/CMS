@@ -74,8 +74,12 @@
                                             <input type="hidden" name="del_post_id" value= '. $row['post_id'].'">
                                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center">Delete</button>
                                         </form>
-    
-                                        <a href="editpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Edit</a>
+
+                                        <form action="editpost.php" method="GET" class="me-2">
+                                            <input type="hidden" name="pid" value= '. $row['post_id'].'">
+                                            <button type="submit" class="btn btn-secondary btn-sm d-flex align-items-center">Edit</button>
+                                        </form>
+                                       
                                     </div>
                                 </div>
                             </div>

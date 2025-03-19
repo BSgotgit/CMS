@@ -2,6 +2,6 @@
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'content_management';
+$database = 'CMS';
 
 $conn = mysqli_connect($hostname, $username, $password, $database);
