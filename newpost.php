@@ -24,10 +24,10 @@
                     $description = $_POST['description'];
                     $category = $_POST['category'];
                     $author = $_POST['author'];
-                    $image = 'image/'. $_POST['image'];
+                    $image = 'images/'. $_POST['image'];
 
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 1)";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 0)";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -36,7 +36,7 @@
                     if ($conn->affected_rows > 0) {
                         echo '
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> Post Created Successfully.
+                            Post Created Successfully.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     }
@@ -69,7 +69,7 @@
                             <div class="row mb-2">
                                 <label for="description" class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="description" name="description" rows="18" required></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="15" required></textarea>
                                 </div>
                             </div>
 

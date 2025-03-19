@@ -32,7 +32,7 @@
                     if ($conn->affected_rows > 0) {
                         echo '
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Success!</strong> Post Deleted Successfully.
+                                Post Deleted Successfully.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>';
                     }

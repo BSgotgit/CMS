@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class=""> <a href="readpost.php?pstd=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
+                                    <div class=""> <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
                                 </div>
 
                             </div>
