@@ -46,7 +46,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
+                                        <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
                                     </div>
                                     <div class="col-lg-12">
                                         <p class="card-text">' . substr($row['description'], 0, 150) . '..... </p>
