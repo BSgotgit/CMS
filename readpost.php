@@ -38,7 +38,7 @@
             
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <img src="' . $row['image'] . '" width="100%" alt="...">
                             </div>
                             <div class="col-lg-12">

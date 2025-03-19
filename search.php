@@ -77,7 +77,11 @@
                                 </div>';
                         }
                     } else {
-                        echo 'No Matching Post Found';
+                        echo '
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            No Matching Post Found.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
                     }
                 } else {
                     // No valid Query, So, Redirect to the home page
