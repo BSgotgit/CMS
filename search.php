@@ -107,7 +107,7 @@
                                     <input type="search" class="form-control" name="query" placeholder="">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
-                                            <img src="images/search-icon.png" style="max-width: 20px;"></img>
+                                            <img src="icons/search-icon.png" style="max-width: 20px;"></img>
                                         </button>
                                     </div>
                                 </div>
@@ -174,6 +174,8 @@
             </aside>
 
         </div>
+
+        <?php include 'include/footer.php'; ?> 
 </body>
 
 </html>
