@@ -4,6 +4,8 @@
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
+    
+    <!--?php include 'include/external.php'; ?-->
 
     <!-- TODO add an offline "search icon" -->
 </head>
@@ -26,7 +28,8 @@
 
                 if (isset($_GET['cate'])) {
                     $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
-                } else {
+                } 
+                else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
                     $query = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";
                 }
@@ -80,7 +83,7 @@
                                     <input type="search" class="form-control" name="query" placeholder="">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
-                                            <img src="images/search-icon.png" style="max-width: 20px;"></img>
+                                            <img src="icons/search-icon.png" style="max-width: 20px;"></img>
                                         </button>
                                     </div>
                                 </div>
@@ -149,6 +152,8 @@
             </aside>
 
         </div>
+
+     <?php include 'include/footer.php'; ?>    
 </body>
 
 </html>

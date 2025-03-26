@@ -17,7 +17,27 @@ include 'include/dbconnect.php';
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
 
+                
                 <?php
+                      $category="Category";
+                      $st ="";
+                      if (isset($_GET['cate']))
+                      {
+                          $category=$_GET['cate'];
+                          $st="active";
+                      }
+                      
+                 echo '<li class="nav-item dropdown">
+                   <a class="nav-link   dropdown-toggle  '.$st.' " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    '.$category.'
+                   </a>
+                       <ul class="dropdown-menu bg-dark">
+                    ';
+
+                    echo '<li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="index.php">All Category</a>
+                         </li> 
+                        ';
 
                 $sel_cat = "SELECT DISTINCT `category` from posts";
                 $run_cat = mysqli_query($conn, $sel_cat);
@@ -34,11 +54,11 @@ include 'include/dbconnect.php';
                         . $rows['category'] . '">' . ucfirst($rows['category']) . '</a> </li>
                     ';
                 }
-
+                   
+                  echo '</ul>
+                       </li>';
                 ?>
-
     
-
                 <!-- Temporary -->
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="newpost.php">New Post</a>
