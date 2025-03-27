@@ -95,7 +95,7 @@
 
                 <!--    LOGIN FORM  -->
 
-                <form role="form" action="">
+                <!--form role="form" action="">
                     <div class="card">
                         <div class=" card-header">
                             Login Area
@@ -123,7 +123,7 @@
 
                         </div>
                     </div>
-                </form>
+                </form-->
 
 
                 <!--    FEATURED / HIGHLIGHTED POSTS  -->

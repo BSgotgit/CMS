@@ -13,12 +13,18 @@ include 'include/dbconnect.php';
         <span class="navbar-brand">CMS</span>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                </li>
 
+            <!--li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            </li-->
                 
                 <?php
+                if(!isset($_GET['username']))
+            {  
+                echo'<li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                </li>';
+
                       $category="Category";
                       $st ="";
                       if (isset($_GET['cate']))
@@ -57,16 +63,36 @@ include 'include/dbconnect.php';
                    
                   echo '</ul>
                        </li>';
+            }        
                 ?>
-    
+            </ul>  
                 <!-- Temporary -->
+              <?php 
+               if(isset($_GET['username'])){
+                echo ' 
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="newpost.php">New Post</a>
+                    <a class="nav-link me-3" aria-current="page" href="newpost.php?username="" >New Post</a>
+                </li>    
+                    <span class="nav-link me-3">|</span>
+                <li class="nav-item">    
+                    <a class="nav-link me-4" aria-current="page" href="manageposts.php?username="">Manage Posts</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="manageposts.php">Manage Posts</a>
-                </li>
-            </ul>
+            </ul>   
+                <div class="d-flex text-white">
+                    <a href="index.php" class="btn btn-outline-light ">Logout</a>
+                </div> 
+                ';
+               }
+               else  {
+            echo '
+            <!--/ul-->
+            <div class="d-flex">
+                    <a href="login.php" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.php" class="btn btn-outline-light">Sign Up</a>
+            </div>';
+            }
+            ?>
         </div>
     </div>
 </nav>

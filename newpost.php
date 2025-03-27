@@ -8,7 +8,11 @@
 
 <body>
 
-    <?php include 'include/menubar.php'; ?>
+    <?php
+
+    //$_GET['username']=$_SESSION['username'];
+
+    include 'include/menubar.php'; ?>
     <br>
 
     <div class="container">
