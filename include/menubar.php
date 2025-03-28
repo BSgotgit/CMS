@@ -68,15 +68,16 @@ include 'include/dbconnect.php';
             </ul>  
                 <!-- Temporary -->
               <?php 
-               if(isset($_GET['username'])){
+              //$valid=0;
+               if(!empty($_GET['username'])&& !empty($_GET['password'])&& !empty($_SERVER['PHP_SELF'])){
                 echo ' 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link me-3" aria-current="page" href="newpost.php?username="" >New Post</a>
+                    <a class="nav-link me-3" aria-current="page" href="newpost.php?username=user" >New Post</a>
                 </li>    
                     <span class="nav-link me-3">|</span>
                 <li class="nav-item">    
-                    <a class="nav-link me-4" aria-current="page" href="manageposts.php?username="">Manage Posts</a>
+                    <a class="nav-link me-4" aria-current="page" href="manageposts.php?username=user">Manage Posts</a>
                 </li>
             </ul>   
                 <div class="d-flex text-white">
