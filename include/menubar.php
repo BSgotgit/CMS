@@ -2,6 +2,7 @@
 //error_reporting(0);// This hides all error warnings.
 
 include 'include/dbconnect.php';
+session_start();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
