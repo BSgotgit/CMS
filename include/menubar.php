@@ -68,8 +68,8 @@ include 'include/dbconnect.php';
             </ul>  
                 <!-- Temporary -->
               <?php 
-              //$valid=0;
-               if(!empty($_GET['username'])&& !empty($_GET['password'])&& !empty($_SERVER['PHP_SELF'])){
+              
+               if(!empty($_GET['username']) && !empty($_GET['password']) && isset($_SESSION['validate'])){
                 echo ' 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

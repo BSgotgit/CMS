@@ -26,7 +26,6 @@
             <section class="col-lg-7">
                 <?php
                 
-                  $_SERVER['PHP_SELF']='';
                 // Checking if Category is Selected or Not (in menubar)
 
                   if(!empty($_GET['username'])&& !empty($_GET['password'])){
@@ -35,9 +34,9 @@
                     $resultV = mysqli_query($conn, $queryV);
 
                     if(mysqli_num_rows($resultV) > 0){
-                      
-                     $_SERVER['PHP_SELF']='valid';
-                     //$valid=1;
+
+                      //$valid=1;
+                      $_SESSION['validate'] = "valid";
                       
                       $rowV = mysqli_fetch_array($resultV);
                       //$userid = $row1["user_id"];
@@ -72,6 +71,7 @@
                     }
                     
                     else{
+                      //unset($_SESSION['validate']);
                       echo' 
                       <div> 
                           <h4>Invalid Username/Password <h4><br>

@@ -10,5 +10,5 @@ if (mysqli_connect_errno()){
     printf('Failed to connect '.mysqli_connect_error());
 }
 
-//session_start();
+session_start();
 ?>

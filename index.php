@@ -12,7 +12,9 @@
 
 <body>
 
-    <?php include 'include/menubar.php'; ?>
+    <?php include 'include/menubar.php';
+     unset($_SESSION['validate']);
+    ?>
     <br>
 
     <div class="container">
