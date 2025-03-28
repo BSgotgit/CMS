@@ -4,7 +4,7 @@
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
-    
+
     <!--?php include 'include/external.php'; ?-->
 
     <!-- TODO add an offline "search icon" -->
@@ -13,7 +13,7 @@
 <body>
 
     <?php include 'include/menubar.php';
-     unset($_SESSION['validate']);
+    unset($_SESSION['validate']);
     ?>
     <br>
 
@@ -27,11 +27,10 @@
                 <?php
 
                 // Checking if Category is Selected or Not (in menubar)
-
+                
                 if (isset($_GET['cate'])) {
                     $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
-                } 
-                else {
+                } else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
                     $query = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";
                 }
@@ -139,26 +138,24 @@
 
                 // Fetching/getting each record/row in loop from result set
                 while ($row = mysqli_fetch_assoc($result)) {
-                   echo '
+                    echo '
                        <div class="list-group">
                        <a href="readpost.php?pid=' . $row['post_id'] . '" class="list-group-item">
-                       <h4 class="list-group-item-heading"> '.$row['title'] .'</h4>
-                       <p class="list-group-item-text">'. substr($row['description'], 0, 230). '</p>
+                       <h4 class="list-group-item-heading"> ' . $row['title'] . '</h4>
+                       <p class="list-group-item-text">' . substr($row['description'], 0, 230) . '</p>
                        </a>
                        </div> </br>
                    ';
                 }
                 ?>
 
-                
+
             </aside>
 
         </div>
 
-    </div> 
-        <?php include 'include/footer.php'; ?>    
+    </div>
+    <?php include 'include/footer.php'; ?>
 </body>
 
 </html>
-
-

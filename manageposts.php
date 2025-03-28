@@ -40,7 +40,7 @@
 
 
                 // Checking if Category is Selected or Not (in menubar)
-
+                
                 if (isset($_GET['cate'])) {
                     $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
                 } else {
@@ -123,7 +123,7 @@
                     <div class="card-header">Filter Category</div>
                     <div class="card-body">
                         <div class="d-flex flex-wrap gap-2">
-                            
+
                             <?php
                             $query = "SELECT DISTINCT `category` FROM posts";
                             $result = mysqli_query($conn, $query);
@@ -131,11 +131,11 @@
                             // Color classes
                             $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
                             $index = 0; // Index to track colors
-
+                            
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $colorClass = $colors[$index % count($colors)];
                                 $index++; // Moving to the next color
-
+                            
                                 echo '
                                     <form action="manageposts.php" method="GET">
                                        <input type="hidden" name="cate" value="' . $row['category'] . '">

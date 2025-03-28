@@ -15,28 +15,26 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-            <!--li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li-->
-                
+
                 <?php
-                if(!isset($_GET['username']))
-            {  
-                echo'<li class="nav-item">
+                if (!isset($_GET['username'])) {
+                    echo '<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>';
 
-                      $category="Category";
-                      $st ="";
-                      if (isset($_GET['cate']))
-                      {
-                          $category=$_GET['cate'];
-                          $st="active";
-                      }
-                      
-                 echo '<li class="nav-item dropdown">
-                   <a class="nav-link   dropdown-toggle  '.$st.' " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    '.$category.'
+                    $category = "Category";
+                    $st = "";
+                    if (isset($_GET['cate'])) {
+                        $category = $_GET['cate'];
+                        $st = "active";
+                    }
+
+                    echo '<li class="nav-item dropdown">
+                   <a class="nav-link   dropdown-toggle  ' . $st . ' " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ' . $category . '
                    </a>
                        <ul class="dropdown-menu bg-dark">
                     ';
@@ -46,31 +44,31 @@ session_start();
                          </li> 
                         ';
 
-                $sel_cat = "SELECT DISTINCT `category` from posts";
-                $run_cat = mysqli_query($conn, $sel_cat);
+                    $sel_cat = "SELECT DISTINCT `category` from posts";
+                    $run_cat = mysqli_query($conn, $sel_cat);
 
-                while ($rows = mysqli_fetch_assoc($run_cat)) {
-                    if (isset($_GET['cate']) && ($_GET['cate'] == $rows['category'])) {
-                        $state = "active";
-                    } else {
-                        $state = "";
+                    while ($rows = mysqli_fetch_assoc($run_cat)) {
+                        if (isset($_GET['cate']) && ($_GET['cate'] == $rows['category'])) {
+                            $state = "active";
+                        } else {
+                            $state = "";
+                        }
+
+                        echo '<li class="nav-item">
+                            <a class="nav-link ' . $state . '" aria-current="page" href="index.php?cate='
+                            . $rows['category'] . '">' . ucfirst($rows['category']) . '</a> </li>
+                    ';
                     }
 
-                    echo '<li class="nav-item">
-                            <a class="nav-link ' . $state . '" aria-current="page" href="index.php?cate='
-                        . $rows['category'] . '">' . ucfirst($rows['category']) . '</a> </li>
-                    ';
-                }
-                   
-                  echo '</ul>
+                    echo '</ul>
                        </li>';
-            }        
+                }
                 ?>
-            </ul>  
-                <!-- Temporary -->
-              <?php 
-              
-               if(!empty($_GET['username']) && !empty($_GET['password']) && isset($_SESSION['validate'])){
+            </ul>
+            <!-- Temporary -->
+            <?php
+
+            if (!empty($_GET['username']) && !empty($_GET['password']) && isset($_SESSION['validate'])) {
                 echo ' 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -85,9 +83,8 @@ session_start();
                     <a href="index.php" class="btn btn-outline-light ">Logout</a>
                 </div> 
                 ';
-               }
-               else  {
-            echo '
+            } else {
+                echo '
             <!--/ul-->
             <div class="d-flex">
                     <a href="login.php" class="btn btn-outline-light me-2">Login</a>

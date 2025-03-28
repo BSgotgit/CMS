@@ -119,7 +119,7 @@
 
                 <!--    LOGIN FORM  -->
 
-                
+
 
                 <!--    FEATURED / HIGHLIGHTED POSTS  -->
 
@@ -132,11 +132,11 @@
 
                 // Fetching/getting each record/row in loop from result set
                 while ($row = mysqli_fetch_assoc($result)) {
-                   echo '
+                    echo '
                        <div class="list-group">
                        <a href="" class="list-group-item">
-                       <h4 class="list-group-item-heading"> '.$row['title'] .'</h4>
-                       <p class="list-group-item-text">'. substr($row['description'], 0, 230). '</p>
+                       <h4 class="list-group-item-heading"> ' . $row['title'] . '</h4>
+                       <p class="list-group-item-text">' . substr($row['description'], 0, 230) . '</p>
                        </a>
                        </div> </br>
                    ';
@@ -146,7 +146,7 @@
 
         </div>
 
-        <?php include 'include/footer.php'; ?> 
+        <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

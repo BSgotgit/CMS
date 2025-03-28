@@ -15,17 +15,17 @@
         <div class="row">
             <section class="col-lg-11">
 
-            <?php
-            // Selecting only one post
+                <?php
+                // Selecting only one post
+                
+                $sel_sql = "SELECT * FROM `posts` WHERE post_id = '$_GET[pid]'";
+                $runs_sql = mysqli_query($conn, $sel_sql);
 
-            $sel_sql = "SELECT * FROM `posts` WHERE post_id = '$_GET[pid]'";
-            $runs_sql = mysqli_query($conn, $sel_sql);
-            
-            // Fetching single row
-            $row = mysqli_fetch_assoc($runs_sql);
-            
-            if ($row) { // Checking if the post exists
-                echo '
+                // Fetching single row
+                $row = mysqli_fetch_assoc($runs_sql);
+
+                if ($row) { // Checking if the post exists
+                    echo '
                 <div class="card">
                     <div class="card-header">
                         <strong>' . $row['title'] . '</strong>
@@ -51,13 +51,14 @@
                         </div>
                     </div>
                 </div>';
-            } else {
-                echo '<p>No post found!</p>';
-            }
-            ?>
+                } else {
+                    echo '<p>No post found!</p>';
+                }
+                ?>
 
             </section>
         </div>
     </div>
 </body>
+
 </html>

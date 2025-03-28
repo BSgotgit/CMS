@@ -1,51 +1,51 @@
 <html>
 
 <head>
-    <title>CMS</title>
-    <link rel="stylesheet" href="include/style.css">
-    <script src="include/script.js"></script>
-    
-    <!--?php include 'include/external.php'; ?-->
+  <title>CMS</title>
+  <link rel="stylesheet" href="include/style.css">
+  <script src="include/script.js"></script>
 
-    <!-- TODO add an offline "search icon" -->
+  <!--?php include 'include/external.php'; ?-->
+
+  <!-- TODO add an offline "search icon" -->
 </head>
 
-  <body>
-  
-      <?php include 'include/menubar.php'; 
-      
-      //$_SESSION['username'] = $_GET['username']; // worked but not as expected.
-    ?>
-      <br>
-      <div class="container">
-        <div class="row">
+<body>
+
+  <?php include 'include/menubar.php';
+
+  //$_SESSION['username'] = $_GET['username']; // worked but not as expected.
+  ?>
+  <br>
+  <div class="container">
+    <div class="row">
 
 
-            <!--   LEFT SIDE MAIN POSTS  -->
+      <!--   LEFT SIDE MAIN POSTS  -->
 
-            <section class="col-lg-7">
-                <?php
-                
-                // Checking if Category is Selected or Not (in menubar)
+      <section class="col-lg-7">
+        <?php
 
-                  if(!empty($_GET['username'])&& !empty($_GET['password'])){
-                    $queryV = "SELECT * FROM `users` WHERE username ='$_GET[username]' AND password ='$_GET[password]'";
+        // Checking if Category is Selected or Not (in menubar)
+        
+        if (!empty($_GET['username']) && !empty($_GET['password'])) {
+          $queryV = "SELECT * FROM `users` WHERE username ='$_GET[username]' AND password ='$_GET[password]'";
 
-                    $resultV = mysqli_query($conn, $queryV);
+          $resultV = mysqli_query($conn, $queryV);
 
-                    if(mysqli_num_rows($resultV) > 0){
+          if (mysqli_num_rows($resultV) > 0) {
 
-                      //$valid=1;
-                      $_SESSION['validate'] = "valid";
-                      
-                      $rowV = mysqli_fetch_array($resultV);
-                      //$userid = $row1["user_id"];
+            //$valid=1;
+            $_SESSION['validate'] = "valid";
 
-                      $query = "SELECT * FROM `posts` WHERE  user_id='$rowV[user_id]'";
-                      $result = mysqli_query($conn, $query);
-                // Fetching/getting each record/row in loop from result set
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="card">
+            $rowV = mysqli_fetch_array($resultV);
+            //$userid = $row1["user_id"];
+        
+            $query = "SELECT * FROM `posts` WHERE  user_id='$rowV[user_id]'";
+            $result = mysqli_query($conn, $query);
+            // Fetching/getting each record/row in loop from result set
+            while ($row = mysqli_fetch_assoc($result)) {
+              echo '<div class="card">
                             <div class="card-header">
                                 <strong>' . $row['title'] . '</strong>
                             </div>
@@ -67,45 +67,41 @@
                             </div>
 
                         </div> </br>';
-                      }  
-                    }
-                    
-                    else{
-                      //unset($_SESSION['validate']);
-                      echo' 
+            }
+          } else {
+            //unset($_SESSION['validate']);
+            echo ' 
                       <div> 
                           <h4>Invalid Username/Password <h4><br>
                           <a href="login.php">Click here to login again.</a>
                       </div>    
                       ';
-                        
-                    }
-                  }
 
-                  else{
-                   
-                   header("Location: login.php");
-                   //$message = "This is your alert message!";
-                   //echo "<script type='text/javascript'>alert('$message');</script>";
-                  }
-                 
-                
-                ?>
-            </section>
+          }
+        } else {
 
-            <!--   RIGHT SIDE CONTENTS  -->
+          header("Location: login.php");
+          //$message = "This is your alert message!";
+          //echo "<script type='text/javascript'>alert('$message');</script>";
+        }
 
-            <aside class="col-lg-5">
 
-                
-                
-            </aside>
+        ?>
+      </section>
 
-        </div>
+      <!--   RIGHT SIDE CONTENTS  -->
 
-    </div> 
-  
-  
-  </body>
+      <aside class="col-lg-5">
 
-</html>    
+
+
+      </aside>
+
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>

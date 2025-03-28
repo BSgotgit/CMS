@@ -11,7 +11,7 @@
     <?php
 
     //$_GET['username']=$_SESSION['username'];
-
+    
     include 'include/menubar.php'; ?>
     <br>
 
@@ -28,7 +28,7 @@
                     $description = $_POST['description'];
                     $category = $_POST['category'];
                     $author = $_POST['author'];
-                    $image = 'images/'. $_POST['image'];
+                    $image = 'images/' . $_POST['image'];
 
 
                     $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 0)";
@@ -73,7 +73,8 @@
                             <div class="row mb-2">
                                 <label for="description" class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="description" name="description" rows="15" required></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="15"
+                                        required></textarea>
                                 </div>
                             </div>
 

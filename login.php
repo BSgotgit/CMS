@@ -4,7 +4,7 @@
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
-    
+
     <!--?php include 'include/external.php'; ?-->
 
     <!-- TODO add an offline "search icon" -->
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
 
-                <!--    LOGIN FORM  -->
+            <!--    LOGIN FORM  -->
             <section class="col-lg-6 col-md-8">
                 <form role="form" action="user.php">
                     <div class="card">
@@ -28,9 +28,9 @@
                         <div class="card-body">
 
                             <div class="row mb-4">
-                                <label for="username" class="col-sm-4 col-form-label" >User Name</label>
+                                <label for="username" class="col-sm-4 col-form-label">User Name</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="username"  name="username">
+                                    <input type="text" class="form-control" id="username" name="username">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -54,7 +54,7 @@
 
         </div>
 
-    </div>   
+    </div>
 </body>
 
 </html>

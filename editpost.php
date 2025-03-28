@@ -51,7 +51,6 @@
 
 
                 // TO EDIT POST 
-
                 elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pid'])) {
                     // Selecting only one post
                     $query = "SELECT * FROM `posts` WHERE post_id = '$_GET[pid]'";
