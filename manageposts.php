@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
@@ -8,7 +7,9 @@
 
 <body>
 
-    <?php include 'include/menubar.php'; ?>
+    <?php
+    include 'include/validate_user.php';
+    include 'include/menubar.php'; ?>
     <br>
 
     <div class="container">
@@ -40,12 +41,12 @@
 
 
                 // Checking if Category is Selected or Not (in menubar)
-                
+
                 if (isset($_GET['cate'])) {
-                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
+                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' AND user_id = '{$_SESSION['user_id']}' ";
                 } else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
-                    $query = "SELECT * FROM `posts` ORDER BY `date` DESC ";
+                    $query = "SELECT * FROM `posts` WHERE user_id = '{$_SESSION['user_id']}' ORDER BY `date` DESC ";
                 }
 
                 // Executing the mysql query
@@ -131,11 +132,11 @@
                             // Color classes
                             $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
                             $index = 0; // Index to track colors
-                            
+
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $colorClass = $colors[$index % count($colors)];
                                 $index++; // Moving to the next color
-                            
+
                                 echo '
                                     <form action="manageposts.php" method="GET">
                                        <input type="hidden" name="cate" value="' . $row['category'] . '">
