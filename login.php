@@ -26,6 +26,8 @@
             $_SESSION['email'] = $_POST['email'];
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['gender'] = $row['gender'];
+            $_SESSION['date'] = $row['date'];
 
             header("Location: user.php");
             $conn->close();
