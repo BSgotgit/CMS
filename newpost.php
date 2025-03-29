@@ -9,10 +9,10 @@
 <body>
 
     <?php
-
-    //$_GET['username']=$_SESSION['username'];
-    
-    include 'include/menubar.php'; ?>
+    include 'include/validate_user.php';
+    include 'include/menubar.php';
+    include 'include/upload_image.php';
+    ?>
     <br>
 
     <div class="container">
@@ -27,11 +27,13 @@
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
-                    $author = $_POST['author'];
-                    $image = 'images/' . $_POST['image'];
 
+                    $image = uploadImage("image");
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 0)";
+                    $user_id = $_SESSION['user_id'];
+                    $author = $_SESSION['username'];
+
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 0,'{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -45,6 +47,7 @@
                         </div>';
                     }
                 }
+
                 ?>
 
 
@@ -81,16 +84,10 @@
                             <div class="row mb-2">
                                 <label for="image" class="col-sm-4 col-form-label">Image</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="image" name="image" required>
+                                    <input type="file" class="form-control" id="image" name="image" required>
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <label for="author" class="col-sm-4 col-form-label">Author</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="author" name="author" required>
-                                </div>
-                            </div>
 
 
                             <div class="row mb-2">
