@@ -55,7 +55,40 @@
       <!--   RIGHT SIDE CONTENTS  -->
 
       <aside class="col-lg-5">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <strong>About User</strong>
+          </div>
 
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12 mt-2">
+                <h2 class="card-text"><?php echo $_SESSION['username']?></h2>
+              </div>
+              <br>
+              <br>
+              <br>
+              <hr>
+              <div class="col-lg-12 mt-3">
+               <span class="card-text"> <b>Email</b> </span><br>
+                <p class="card-text"> <?php echo $_SESSION['email']?> </p>
+              </div>
+
+              <div class="col-lg-12 mt-3">
+               <span class="card-text"> <b>Gender</b> </span><br>
+                <p class="card-text"> <?php echo $_SESSION['gender']?> </p>
+              </div>
+            </div>
+            <br><br>
+            <div class="row">
+            <span class="card-text"> <b>Joined on :</b> </span><br>
+                <p class="card-text"> <?php echo $_SESSION['date']?> </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </aside>
 
     </div>
