@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
@@ -41,7 +42,7 @@
 
 
                 // Checking if Category is Selected or Not (in menubar)
-
+                
                 if (isset($_GET['cate'])) {
                     $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' AND user_id = '{$_SESSION['user_id']}' ";
                 } else {
@@ -80,6 +81,10 @@
                                             <input type="hidden" name="pid" value= ' . $row['post_id'] . '>
                                             <button type="submit" class="btn btn-secondary btn-sm d-flex align-items-center">Edit</button>
                                         </form>
+
+                                        <div class="row">
+                                        <div class=""> <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-primary">Read More</a></div>
+                                        </div>
                                        
                                     </div>
                                 </div>
@@ -97,7 +102,7 @@
 
                 <!--     SEARCH BOX  -->
 
-                <form role="form" action="search.php" method="get">
+                <!--form role="form" action="search.php" method="get">
                     <div class="card">
 
                         <div class="card-header">Search Something</div>
@@ -115,47 +120,80 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </form-->
 
-
-                <!-- Filter Category -->
+                <!--User Information-->
 
                 <div class="card">
-                    <div class="card-header">Filter Category</div>
+                    <div class="card-header bg-dark text-white">
+                        <strong>About User</strong>
+                    </div>
+
                     <div class="card-body">
-                        <div class="d-flex flex-wrap gap-2">
+                        <div class="row">
+                            <div class="col-lg-12 mt-2">
+                                <h2 class="card-text"><?php echo $_SESSION['username'] ?></h2>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <hr>
+                            <div class="col-lg-12 mt-3">
+                                <span class="card-text"> <b>Email</b> </span><br>
+                                <p class="card-text"> <?php echo $_SESSION['email'] ?> </p>
+                            </div>
 
-                            <?php
-                            $query = "SELECT DISTINCT `category` FROM posts";
-                            $result = mysqli_query($conn, $query);
+                            <div class="col-lg-12 mt-3">
+                                <span class="card-text"> <b>Gender</b> </span><br>
+                                <p class="card-text"> <?php echo $_SESSION['gender'] ?> </p>
+                            </div>
+                        </div>
 
-                            // Color classes
-                            $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
-                            $index = 0; // Index to track colors
+                        <br><br>
+                        <div class="row">
+                            <span class="card-text"> <b>Joined on :</b> </span><br>
+                            <p class="card-text"> <?php echo $_SESSION['date'] ?> </p>
+                        </div>
+                    </div>
+                </div>
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $colorClass = $colors[$index % count($colors)];
-                                $index++; // Moving to the next color
+                    <!-- Filter Category -->
 
-                                echo '
+                    <br>
+                    <div class="card">
+                        <div class="card-header">Filter Category</div>
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap gap-2">
+
+                                <?php
+                                $query = "SELECT DISTINCT `category` FROM posts WHERE user_id={$_SESSION['user_id']}" ;
+                                $result = mysqli_query($conn, $query);
+
+                                // Color classes
+                                $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                                $index = 0; // Index to track colors
+                                
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $colorClass = $colors[$index % count($colors)];
+                                    $index++; // Moving to the next color
+                                
+                                    echo '
                                     <form action="manageposts.php" method="GET">
                                        <input type="hidden" name="cate" value="' . $row['category'] . '">
                                        <button type="submit" class="btn btn-' . $colorClass . ' btn-sm">' . $row['category'] . '</button>
                                     </form>
                                 ';
-                            }
-                            ?>
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
-
+            </aside>
 
         </div>
-
-        </aside>
-
-    </div>
 </body>
 
 </html>
