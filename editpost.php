@@ -8,7 +8,10 @@
 
 <body>
 
-    <?php include 'include/menubar.php'; ?>
+    <?php 
+    include 'include/validate_user.php';
+    include 'include/menubar.php'; 
+    ?>
     <br>
 
     <div class="container">
