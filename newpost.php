@@ -27,13 +27,14 @@
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
+                    $feature = $_POST['feature'];
 
                     $image = uploadImage("image");
 
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}', 0,'{$user_id}')";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}','{$feature}' ,'{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -88,6 +89,15 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                
+                                
+                                <div class="col-sm-8">
+                                <!--label for="image" class="col-sm-4 col-form-label">Addres as featured</label-->
+                                <input type="checkbox" c id="feature" name="feature" value="1">  Checkin to address as featured.
+                                </div>
+                                
+                            </div>
 
 
                             <div class="row mb-2">
