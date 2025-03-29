@@ -18,7 +18,7 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
-        $password = $_POST['password'];
+        $pwd = $_POST['password'];
 
         include './include/dbconnect.php';
 
@@ -27,7 +27,7 @@
 
         if ($result->num_rows == 0) {
             // New Account
-            $query = "INSERT INTO users(username, gender, email, password) VALUES ('{$name}', '{$gender}', '{$email}', '{$password}')";
+            $query = "INSERT INTO users(username, gender, email, `password`) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}')";
             $result = $conn->query($query);
 
             if ($conn->affected_rows > 0) {
