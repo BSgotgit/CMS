@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                <label for="description" class="col-sm-4 col-form-label">Content</label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" id="description" name="description" rows="15"
                                         required></textarea>
