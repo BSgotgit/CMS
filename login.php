@@ -7,27 +7,29 @@
 
     <!--?php include 'include/external.php'; ?-->
 
-    <!-- TODO add an offline "search icon" -->
 </head>
 
 <body>
 
-    <?php 
+    <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-   
         include './include/dbconnect.php';
 
         $query = "SELECT * FROM users WHERE email = '{$_POST['email']}' AND password = '{$_POST['password']}' ";
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {
-                session_start();
-                $_SESSION['email'] = $_POST['email'];
+            $row = $result->fetch_assoc();
 
-                header("Location: index.php");
-                $conn->close();
-                exit();
+            session_start();
+            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['username'] = $row['username'];
+
+            header("Location: user.php");
+            $conn->close();
+            exit();
         }
     }
 
@@ -35,18 +37,16 @@
 
     ?>
 
-
-
     <br>
 
     <div class="container">
         <div class="row justify-content-center mt-5">
 
-            <!--    LOGIN FORM  -->
+            <!-- LOGIN FORM -->
             <section class="col-lg-6 col-md-8">
                 <form role="form" action="login.php" method="POST">
                     <div class="card">
-                        <div class=" card-header bg-dark  text-white">
+                        <div class="card-header bg-dark text-white">
                             LOG IN
                         </div>
                         <div class="card-body">
@@ -63,9 +63,8 @@
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                             </div>
-                            <div class="row mb-4  justify-content-end">
-
-                                <div class="col-sm-8 ">
+                            <div class="row mb-4 justify-content-end">
+                                <div class="col-sm-8">
                                     <input type="submit" id="submit" class="btn btn-success btn-block" value="Submit">
                                 </div>
                             </div>
@@ -77,8 +76,8 @@
             </section>
 
         </div>
-
     </div>
+
 </body>
 
 </html>
