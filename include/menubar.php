@@ -86,7 +86,7 @@ $logged_in = isset($_SESSION['email']);
                             </div> 
 
                             <div class="d-flex text-white  ms-3 " id="user-name">
-                               <b> ' . ucwords($_SESSION['username']) . '</b>
+                              <a href="user.php" style="color: white; text-decoration: none;"> <b> ' . $_SESSION['username'] . '</b> </a>
                             </div> 
                     ';
                 } else {
