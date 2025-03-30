@@ -1,6 +1,0 @@
-ALTER TABLE `posts` ADD `featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `author`;
-
-
-CREATE TABLE `cms`.`users` (`email` VARCHAR(30) NOT NULL , `password` VARCHAR(20) NOT NULL , `full_name` VARCHAR(30) NOT NULL , PRIMARY KEY (`email`)) ;
-
-
