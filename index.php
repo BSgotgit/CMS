@@ -75,7 +75,7 @@
                 <form role="form" action="search.php" method="get">
                     <div class="card">
 
-                        <div class="card-header">Search Something</div>
+                        <div class="card-header  bg-dark text-white">Search Something</div>
 
                         <div class="card-body">
                             <div class="row mb-2">
@@ -107,8 +107,8 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '
                        <div class="list-group">
-                       <a href="readpost.php?pid=' . $row['post_id'] . '" class="list-group-item">
-                       <h4 class="list-group-item-heading"> ' . $row['title'] . '</h4>
+                       <a href="readpost.php?pid=' . $row['post_id'] . '" class="list-group-item  bg-dark text-white">
+                       <h4 class="list-group-item-heading "> ' . $row['title'] . '</h4>
                        <p class="list-group-item-text">' . substr($row['description'], 0, 230) . '</p>
                        </a>
                        </div> </br>
