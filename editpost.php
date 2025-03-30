@@ -29,10 +29,11 @@
                     $description = $_POST['description'];
                     $image = $_POST['image'];
                     $author = $_POST['author'];
+                    $feature= $_POST['feature'];
 
                     // Update query
                     $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
-                              `image` = '$image', `author` = '$author' WHERE `post_id` = '$post_id'";
+                              `image` = '$image', `author` = '$author',`featured` ='$feature' WHERE `post_id` = '$post_id'";
 
                     $result = mysqli_query($conn, $query);
 
@@ -61,6 +62,13 @@
 
                     // Checking if the post exists
                     if ($row = mysqli_fetch_assoc($result)) {
+                       
+                        if($row['featured']){
+                            $check="checked";
+                        }
+                        else{
+                            $check= "";
+                        }
                         echo '
                        <!-- Edit Post Form -->
                        <form role="form" action="editpost.php" method="post" enctype="multipart/form-data">
@@ -104,6 +112,13 @@
                                            <input type="text" class="form-control" id="author" name="author" value="' . $row['author'] . '" required>
                                        </div>
                                    </div>
+
+                                  <div class="row mb-2">
+                                      <div class="col-sm-8">
+                                         <input type="checkbox"  id="feature" name="feature" value="1" '.$check.'>  Checkin to address as featured.
+                                      </div>                                
+                                 </div>
+
                         
                                    <div class="row mb-2">
                                        <div class="col-sm-8 offset-sm-4">
