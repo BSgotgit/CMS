@@ -46,6 +46,12 @@
                             Post Created Successfully.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
+                    } else {
+                        echo '
+                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Post creation failed
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
                     }
                 }
 
@@ -90,12 +96,13 @@
                             </div>
 
                             <div class="row mb-2">
-                                
+
                                 <div class="col-sm-8">
-                                <!--label for="image" class="col-sm-4 col-form-label">Addres as featured</label-->
-                                <input type="checkbox"  id="feature" name="feature" value="1">  Checkin to address as featured.
+                                    <!--label for="image" class="col-sm-4 col-form-label">Addres as featured</label-->
+                                    <input type="checkbox" id="feature" name="feature" value="1"> Checkin to address as
+                                    featured.
                                 </div>
-                                
+
                             </div>
 
 
