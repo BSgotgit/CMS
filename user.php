@@ -83,7 +83,15 @@
             <div class="row">
             <span class="card-text"> <b>Joined on :</b> </span><br>
                 <p class="card-text"> <?php echo $_SESSION['date']?> </p>
+              
+            </div>
+            <br>
+            <div class="row">
+
+              <div>
+                <a  href="edituser.php"><img style="max-width: 25px;" src="icons/edits.png" alt="Edit"></a> 
               </div>
+  
             </div>
 
           </div>
