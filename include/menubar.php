@@ -14,9 +14,6 @@ $logged_in = isset($_SESSION['email']);
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="container">
-        <!--a href="view.php" class="navbar-brand">CMS SYSTEM</a-->
-        <!--label class= "navbar-brand">CMS System</label-->
-
         <span class="navbar-brand">CMS</span>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

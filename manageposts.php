@@ -105,28 +105,6 @@
 
             <aside class="col-lg-5">
 
-                <!--     SEARCH BOX  -->
-
-                <!--form role="form" action="search.php" method="get">
-                    <div class="card">
-
-                        <div class="card-header">Search Something</div>
-
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="input-group">
-                                    <input type="search" class="form-control" name="query" placeholder="">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <img src="icons/search-icon.png" style="max-width: 20px;"></img>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form-->
-
                 <!--User Information-->
 
                 <div class="card">

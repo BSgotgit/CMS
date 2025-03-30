@@ -4,9 +4,6 @@
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
-
-    <!--?php include 'include/external.php'; ?-->
-
 </head>
 
 <body>
