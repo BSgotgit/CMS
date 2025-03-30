@@ -4,6 +4,11 @@
     <title>CMS</title>
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
+    <script>
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this post?');
+    }
+    </script>
 </head>
 
 <body>
@@ -72,7 +77,7 @@
                                     
                                     <div class="d-flex ms-3">
     
-                                        <form action="manageposts.php" method="POST" class="me-2">
+                                        <form action="manageposts.php" method="POST" class="me-2" onsubmit="return confirmDelete()">
                                             <input type="hidden" name="del_post_id" value= ' . $row['post_id'] . '>
                                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center">Delete</button>
                                         </form>
