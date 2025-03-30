@@ -24,8 +24,8 @@ function uploadImage($fileInputName, $target_dir = "images/")
         return false;
     }
 
-    // Check file size (max size 2MB)
-    if ($_FILES[$fileInputName]["size"] > 2000000) {
+    // Check file size (max size 700MB)
+    if ($_FILES[$fileInputName]["size"] > 700000000) {
         echo "Sorry, your file is too large.";
         return false;
     }
