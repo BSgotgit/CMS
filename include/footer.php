@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-4 mb-3">
         <h5>About Us</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+        <p>This is a Content Management System made for college project purpose.</p>
       </div>
       <div class="col-md-4 mb-3">
         <h5>Quick Links</h5>
@@ -26,4 +26,3 @@
     <p class="mb-0">© 2025 Company Name. All rights reserved.</p>
   </div>
 </footer>
-<!--Implemented inline css in footer tag as ".container-fluid" did not work -->
