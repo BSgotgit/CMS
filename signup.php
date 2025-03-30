@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
 
-    <!--?php include 'include/external.php'; ?-->
 </head>
 
 <body>
@@ -73,7 +72,7 @@
                             <div class="row mb-4">
                                 <label for="gender" class="col-sm-4 col-form-label">Gender</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="gender" name="gender" required>
+                                    <input type="text" class="form-control" id="gender" name="gender" placeholder="'Male/Female/Other' "required>
                                 </div>
                             </div>
 
