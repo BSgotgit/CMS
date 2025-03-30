@@ -91,10 +91,9 @@
 
                             <div class="row mb-2">
                                 
-                                
                                 <div class="col-sm-8">
                                 <!--label for="image" class="col-sm-4 col-form-label">Addres as featured</label-->
-                                <input type="checkbox" c id="feature" name="feature" value="1">  Checkin to address as featured.
+                                <input type="checkbox"  id="feature" name="feature" value="1">  Checkin to address as featured.
                                 </div>
                                 
                             </div>
