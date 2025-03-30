@@ -28,6 +28,7 @@
             $_SESSION['username'] = $row['username'];
             $_SESSION['gender'] = $row['gender'];
             $_SESSION['date'] = $row['date'];
+            $_SESSION['password'] = $row['password'];
 
             header("Location: user.php");
             $conn->close();
