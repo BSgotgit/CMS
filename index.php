@@ -25,7 +25,7 @@
                 // Checking if Category is Selected or Not (in menubar)
                 
                 if (isset($_GET['cate'])) {
-                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]'";
+                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' ORDER BY `date` DESC ";
                 } else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
                     $query = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";

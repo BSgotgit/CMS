@@ -43,7 +43,7 @@ $logged_in = isset($_SESSION['email']);
                          </li> 
                         ';
 
-                $sel_cat = "SELECT DISTINCT `category` from posts";
+                $sel_cat = "SELECT DISTINCT `category` from posts ";
                 $run_cat = mysqli_query($conn, $sel_cat);
 
                 while ($rows = mysqli_fetch_assoc($run_cat)) {
