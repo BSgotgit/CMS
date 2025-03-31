@@ -8,9 +8,9 @@
 
 <body>
 
-    <?php 
+    <?php
     include 'include/validate_user.php';
-    include 'include/menubar.php'; 
+    include 'include/menubar.php';
     ?>
     <br>
 
@@ -29,11 +29,18 @@
                     $description = $_POST['description'];
                     $image = $_POST['image'];
                     $author = $_POST['author'];
-                    $feature= $_POST['feature'];
+
+                    if (isset($_POST['featured'])) {
+                        $featured = $_POST['featured'];
+                    } 
+                    else {
+                        $featured = 0;
+                    }
+
 
                     // Update query
                     $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
-                              `image` = '$image', `author` = '$author',`featured` ='$feature' WHERE `post_id` = '$post_id'";
+                              `image` = '$image', `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
 
                     $result = mysqli_query($conn, $query);
 
@@ -62,12 +69,11 @@
 
                     // Checking if the post exists
                     if ($row = mysqli_fetch_assoc($result)) {
-                       
-                        if($row['featured']){
-                            $check="checked";
-                        }
-                        else{
-                            $check= "";
+
+                        if ($row['featured']) {
+                            $check = "checked";
+                        } else {
+                            $check = "";
                         }
                         echo '
                        <!-- Edit Post Form -->
@@ -115,7 +121,7 @@
 
                                   <div class="row mb-2">
                                       <div class="col-sm-8">
-                                         <input type="checkbox"  id="feature" name="feature" value="1" '.$check.'>  Checkin to address as featured.
+                                         <input type="checkbox"  id="featured" name="featured" value="1" ' . $check . '>  Checkin to address as featured.
                                       </div>                                
                                  </div>
 
