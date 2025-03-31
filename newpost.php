@@ -21,20 +21,29 @@
             <section class="col-lg-12">
 
                 <?php
-
+                
                 // Checking if the form is submitted using POST
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    
+                    
+
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
-                    $feature = $_POST['feature'];
+                   
+                    if (isset($_POST['featured'])) {
+                        $featured = $_POST['featured'];
+                    } 
+                    else {
+                        $featured =0;
+                    }
 
-                    $image = uploadImage("image");
+                    $image = uploadImage("image","../images/");
 
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}','{$feature}' ,'{$user_id}')";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}','{$featured}' ,'{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -98,8 +107,7 @@
                             <div class="row mb-2">
 
                                 <div class="col-sm-8">
-                                    <!--label for="image" class="col-sm-4 col-form-label">Addres as featured</label-->
-                                    <input type="checkbox" id="feature" name="feature" value="1"> Checkin to address as
+                                    <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address as
                                     featured.
                                 </div>
 
