@@ -87,10 +87,11 @@
                                             <button type="submit" class="btn btn-secondary btn-sm d-flex align-items-center">Edit</button>
                                         </form>
 
-                                        <div class="row">
-                                        <div class=""> <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-primary">Read More</a></div>
-                                        </div>
-                                       
+                                        <form action="readpost.php" method="GET" class="me-2">
+                                            <input type="hidden" name="pid" value= ' . $row['post_id'] . '>
+                                            <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center">Read More</button>
+                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
