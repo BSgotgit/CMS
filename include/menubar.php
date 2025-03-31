@@ -78,12 +78,13 @@ $logged_in = isset($_SESSION['email']);
                                 <a class="nav-link me-4" aria-current="page" href="manageposts.php">Manage Posts</a>
                             </li>
                         </ul>   
-                            <div class="d-flex text-white ">
-                                <a href="logout.php" class="btn btn-outline-light ">Logout</a>
+                            
+                            <div class="d-flex text-white " id="user-name">
+                              <a href="user.php" style="color: white; text-decoration: none;"> <b> ' . $_SESSION['username'] . '</b> </a>
                             </div> 
 
-                            <div class="d-flex text-white  ms-3 " id="user-name">
-                              <a href="user.php" style="color: white; text-decoration: none;"> <b> ' . $_SESSION['username'] . '</b> </a>
+                            <div class="d-flex text-white ms-3">
+                                <a href="logout.php" class="btn btn-outline-light ">Logout</a>
                             </div> 
                     ';
                 } else {
