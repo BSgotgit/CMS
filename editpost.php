@@ -10,6 +10,7 @@
 
     <?php
     include 'include/validate_user.php';
+    include 'include/upload_image.php';
     include 'include/menubar.php';
     ?>
     <br>
@@ -27,21 +28,30 @@
                     $title = $_POST['title'];
                     $category = $_POST['category'];
                     $description = $_POST['description'];
-                    $image = $_POST['image'];
+
                     $author = $_POST['author'];
+
+                    $image = uploadImage("image", "../images/");
+
+
 
                     if (isset($_POST['featured'])) {
                         $featured = $_POST['featured'];
-                    } 
-                    else {
+                    } else {
                         $featured = 0;
                     }
+                    
 
+                    if ($image) {
+                        $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
+                        `image` = '$image', `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
+                    } else {
+                        $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
+                        `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
+                    }
 
                     // Update query
-                    $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
-                              `image` = '$image', `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
-
+                
                     $result = mysqli_query($conn, $query);
 
                     // Checking if row updated
@@ -108,7 +118,7 @@
                                    <div class="row mb-2">
                                        <label for="image" class="col-sm-4 col-form-label">Image URL</label>
                                        <div class="col-sm-8">
-                                           <input type="text" class="form-control" id="image" name="image" value="' . $row['image'] . '" required>
+                                           <input type="file" class="form-control" id="image" name="image" value="" >
                                        </div>
                                    </div>
                         
