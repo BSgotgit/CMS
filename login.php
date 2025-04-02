@@ -68,7 +68,7 @@
                             </div>
                             <div class="row mb-4 justify-content-end">
                                 <div class="col-sm-8">
-                                    <input type="submit" id="submit" class="btn btn-success btn-block" value="Submit">
+                                    <input type="submit" id="submit" class="btn btn-success btn-block" value="Login">
                                 </div>
                             </div>
 
