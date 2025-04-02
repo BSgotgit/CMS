@@ -10,16 +10,18 @@
 <body>
 
     <?php
-    include 'include/menubar.php';
+    require 'include/validate_user.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-       // Updating user details in session varibles
+        // Updating user details in session varibles
+    
+        $_SESSION['username'] = $_POST['name'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['gender'] = $_POST['gender'];
+        $_SESSION['password'] = $_POST['password'];
 
-       $_SESSION['username'] = $_POST['name'];
-       $_SESSION['email'] = $_POST['email'];
-       $_SESSION['gender'] = $_POST['gender'];
-       
+
 
 
         $name = $_POST['name'];
@@ -27,29 +29,34 @@
         $gender = $_POST['gender'];
         $pwd = $_POST['password'];
 
+        include 'include/menubar.php';
         include './include/dbconnect.php';
 
 
 
-        $query = "UPDATE `users` SET `username` = '$name', `email` = '$email', `password` = '$pwd' WHERE `user_id` = '{$_SESSION['user_id']}'";
+        $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd' WHERE `user_id` = '{$_SESSION['user_id']}'";
         $result = $conn->query($query);
 
         if ($conn->affected_rows > 0) {
             echo '
-                    <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8 justify-content-center mt-5" role="alert">
+                <div style="display:flex; justify-content:space-around;">
+                    <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8  mt-5" role="alert">
                         Account Updated
-                    </div>';
-            $conn->close();
-            exit();
+                    </div>
+                </div>';
         } else {
-            echo '
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '  
+            <div style="display:flex; justify-content:space-around;">
+                    <div class="alert alert-danger alert-dismissible fade show col-lg-6 col-md-8  mt-5" role="alert">
                         Could Not Update.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-            $conn->close();
-            exit();
+                    </div>
+            </div>';
         }
+        $conn->close();
+        exit();
+    } else {
+        include 'include/menubar.php';
     }
 
     ?>
@@ -85,10 +92,17 @@
                             <div class="row mb-4">
                                 <label for="gender" class="col-sm-4 col-form-label">Gender</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="gender" name="gender"
-                                        value="<?php echo $_SESSION['gender']; ?>">
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </div>
                             </div>
+                            <script>
+                                document.getElementById("gender").value = "<?= $_SESSION['gender'] ?>" ;
+                            </script>
+
 
                             <div class="row mb-4">
                                 <label for="password" class="col-sm-4 col-form-label">Password</label>
