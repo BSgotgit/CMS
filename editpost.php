@@ -6,16 +6,16 @@
     <script src="include/script.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
     include 'include/validate_user.php';
-    include 'include/upload_image.php';
+    include 'include/upload_media.php';
     include 'include/menubar.php';
     ?>
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row">
             <section class="col-lg-11">
 
@@ -31,7 +31,7 @@
 
                     $author = $_POST['author'];
 
-                    $image = uploadImage("image", "../images/");
+                    $image = uploadMedia("image", "../images/");
 
 
 
@@ -40,7 +40,7 @@
                     } else {
                         $featured = 0;
                     }
-                    
+
 
                     if ($image) {
                         $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
@@ -51,7 +51,7 @@
                     }
 
                     // Update query
-                
+
                     $result = mysqli_query($conn, $query);
 
                     // Checking if row updated
@@ -157,6 +157,7 @@
             </section>
         </div>
     </div>
+    <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

@@ -1,0 +1,199 @@
+<?php
+include 'include/validate_admin.php';
+include 'include/dbconnect.php';
+
+// Handle new user addition
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_user'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $role = $_POST['role'];
+
+    $query = "INSERT INTO users (username, email, password, role)
+        VALUES ('$username', '$email', '$password', '$role')";
+
+    if ($conn->query($query) === TRUE) {
+        $message = "User added successfully!";
+    } else {
+        $message = "Error adding user: " . $conn->error;
+    }
+}
+
+// Handle role update
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
+    $user_id = $_POST['user_id'];
+    $new_role = $_POST['role'];
+
+    $query = "UPDATE users SET role='$new_role' WHERE user_id=$user_id";
+    if ($conn->query($query) === TRUE) {
+        $message = "User role updated!";
+    } else {
+        $message = "Error updating role: " . $conn->error;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="include/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <a href="index.php" class="navbar-brand">CMS Admin</a>
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Dashboard</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5>Total Users</h5>
+                        <p><?php echo $conn->query("SELECT COUNT(*) FROM users")->fetch_row()[0]; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5>Total Posts</h5>
+                        <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-body">
+                        <h5>Total Posts</h5>
+                        <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-body">
+                        <h5>Total Posts</h5>
+                        <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add User Section -->
+        <h3>Add New User</h3>
+        <form action="" method="POST" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="col-md-2">
+                    <select name="role" class="form-select">
+                        <option value="admin">Admin</option>
+                        <option value="editor">Editor</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" name="add_user" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- User Management Section -->
+        <h3>Manage Users</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $result = $conn->query("SELECT * FROM users");
+                while ($row = $result->fetch_assoc()) {
+                    $userRole = $row['role']; // current role
+                    echo "<tr>
+                            <td>{$row['user_id']}</td>
+                            <td>{$row['username']}</td>
+                            <td>{$row['email']}</td>
+                            <td>{$row['role']}</td>
+                            <td>
+                                <form method='POST' class='d-flex'>
+                                    <input type='hidden' name='user_id' value='{$row['user_id']}'>
+                                    <select name='role' class='form-select me-2'>
+                                        <option value='admin' " . ($userRole == 'admin' ? 'selected' : '') . ">Admin</option>
+                                        <option value='editor' " . ($userRole == 'editor' ? 'selected' : '') . ">Editor</option>
+                                        <option value='contributer' " . ($userRole == 'contributer' ? 'selected' : '') . ">Contributer</option>
+                                        <option value='user' " . ($userRole == 'user' ? 'selected' : '') . ">User</option>
+                                    </select>
+                                    <button type='submit' name='update_role' class='btn btn-warning btn-sm'>Update</button>
+                                </form> 
+                            </td>
+                            <td>
+                                <form method='POST' class='d-flex'>
+                                    <input type='hidden' name='user_id' value='{$row['user_id']}'>
+                                    <button type='submit' name='remove_user' class='btn btn-danger btn-sm'>Remove</button>
+                                </form> 
+                            </td>
+
+                        </tr> ";
+                }
+                ?>
+
+            </tbody>
+        </table>
+
+        <!-- Recent Posts Section -->
+        <h3>Recent Posts</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $result = $conn->query("SELECT * FROM posts ORDER BY date DESC LIMIT 7");
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                        <td>{$row['post_id']}</td>
+                        <td>{$row['title']}</td>
+                        <td>{$row['category']}</td>
+                        <td>{$row['author']}</td>
+                        <td>{$row['date']}</td>
+                        <td>
+                            <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
+                            <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                        </td>
+                    </tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

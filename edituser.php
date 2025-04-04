@@ -7,7 +7,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
     require 'include/validate_user.php';
@@ -15,19 +15,14 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Updating user details in session varibles
-    
         $_SESSION['username'] = $_POST['name'];
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['password'] = $_POST['password'];
-
-
-
 
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
-        $pwd = $_POST['password'];
+        $pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         include 'include/menubar.php';
         include './include/dbconnect.php';
@@ -38,22 +33,24 @@
         $result = $conn->query($query);
 
         if ($conn->affected_rows > 0) {
-            echo '
-                <div style="display:flex; justify-content:space-around;">
-                    <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8  mt-5" role="alert">
+            echo '  
+                <div class="d-flex flex-column flex-grow-1 align-items-center mt-5">
+                    <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8" role="alert">
                         Account Updated
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>';
         } else {
             echo '  
-            <div style="display:flex; justify-content:space-around;">
-                    <div class="alert alert-danger alert-dismissible fade show col-lg-6 col-md-8  mt-5" role="alert">
+                <div class="d-flex flex-column flex-grow-1 align-items-center mt-5">
+                    <div class="alert alert-danger alert-dismissible fade show col-lg-6 col-md-8" role="alert">
                         Could Not Update.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-            </div>';
+                </div>';
         }
         $conn->close();
+        include 'include/footer.php';
         exit();
     } else {
         include 'include/menubar.php';
@@ -63,7 +60,7 @@
 
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row justify-content-center mt-5">
 
             <!-- SIGN UP FORM -->
@@ -100,7 +97,7 @@
                                 </div>
                             </div>
                             <script>
-                                document.getElementById("gender").value = "<?= $_SESSION['gender'] ?>" ;
+                                document.getElementById("gender").value = "<?= $_SESSION['gender'] ?>";
                             </script>
 
 
@@ -108,7 +105,7 @@
                                 <label for="password" class="col-sm-4 col-form-label">Password</label>
                                 <div class="col-sm-8">
                                     <input type="password" class="form-control" id="password" name="password"
-                                        value="<?php echo $_SESSION['password']; ?>">
+                                        value="">
                                 </div>
                             </div>
 
@@ -128,8 +125,7 @@
         </div>
 
     </div>
+    <?php include 'include/footer.php'; ?>
+</body>
 
-    </body>
-    
 </html>
-    

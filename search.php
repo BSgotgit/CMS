@@ -6,7 +6,7 @@
     <script src="include/script.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php include 'include/menubar.php'; ?>
     <br>
@@ -57,8 +57,17 @@
                                     <div class="card-body">
     
                                         <div class="row">
-                                        <div class="col-lg-9">
-                                        <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
+                                        <div class="col-lg-12">
+                                            <div class="ratio ratio-16x9">';
+
+                    // Check if media is an image or video
+                    if ($row['file_type'] == 'image') {
+                        echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
+                    } elseif ($row['file_type'] == 'video') {
+                        echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
+                    }
+
+echo           '</div>
                                         </div>
                                         <div class="col-lg-12">
                                         <p class="card-text">' . substr($row['description'], 0, 150) . '..... 

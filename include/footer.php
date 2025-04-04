@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white pt-4"
+<footer class="bg-dark text-white pt-4 mt-5"
   style="width:100vw;position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
   <div class="container">
     <div class="row">
@@ -23,6 +23,6 @@
     </div>
   </div>
   <div class="bg-secondary text-center py-3">
-    <p class="mb-0">© 2025 Company Name. All rights reserved.</p>
+    <p class="mb-0">© 2025 Government Autonomous College, Rourkela. All rights reserved.</p>
   </div>
 </footer>

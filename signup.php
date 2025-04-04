@@ -7,7 +7,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
     include 'include/menubar.php';
@@ -17,7 +17,10 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
-        $pwd = $_POST['password'];
+        $pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        include 'include/upload_media.php';
+        $image = uploadMedia("profile_pic", "../images/profile/");
 
         include './include/dbconnect.php';
 
@@ -26,15 +29,20 @@
 
         if ($result->num_rows == 0) {
             // New Account
-            $query = "INSERT INTO users(username, gender, email, `password`) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}')";
+            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', 'user', '{$image}')";
             $result = $conn->query($query);
 
             if ($conn->affected_rows > 0) {
                 echo '
-                    <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8 justify-content-center mt-5" role="alert">
-                        Account Created Successfully 
-                    </div>';
+                    <div class="d-flex justify-content-center align-items-start mt-4 flex-grow-1">
+                        <div class="alert alert-success alert-dismissible fade show col-lg-6 col-md-8 text-center mt-3" role="alert">
+                            Account Created Successfully
+                        </div>
+                    </div>
+
+                ';
                 $conn->close();
+                include 'include/footer.php';
                 exit();
             }
         } else {
@@ -45,12 +53,12 @@
 
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row justify-content-center mt-5">
 
             <!-- SIGN UP FORM -->
             <section class="col-lg-6 col-md-8">
-                <form role="form" action="signup.php" method="POST">
+                <form role="form" action="signup.php" method="POST" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header bg-dark text-white">
                             Create an Account
@@ -69,10 +77,15 @@
                                     <input type="text" class="form-control" id="email" name="email" required>
                                 </div>
                             </div>
+
                             <div class="row mb-4">
                                 <label for="gender" class="col-sm-4 col-form-label">Gender</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="gender" name="gender" placeholder="'Male/Female/Other' "required>
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -80,6 +93,13 @@
                                 <label for="password" class="col-sm-4 col-form-label">Password</label>
                                 <div class="col-sm-8">
                                     <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label for="image" class="col-sm-4 col-form-label">Profile Picture</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control" id="image" name="profile_pic" value="">
                                 </div>
                             </div>
 
@@ -106,8 +126,10 @@
             </section>
 
         </div>
-
     </div>
+
+    <?php include 'include/footer.php'; ?>
+
 </body>
 
 </html>

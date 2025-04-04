@@ -6,44 +6,45 @@
     <script src="include/script.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
     include 'include/validate_user.php';
     include 'include/menubar.php';
-    include 'include/upload_image.php';
+    include 'include/upload_media.php';
     ?>
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row">
 
             <section class="col-lg-12">
 
                 <?php
-                
+
                 // Checking if the form is submitted using POST
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    
-                    
+
+
 
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
-                   
+
                     if (isset($_POST['featured'])) {
                         $featured = $_POST['featured'];
-                    } 
-                    else {
-                        $featured =0;
+                    } else {
+                        $featured = 0;
                     }
 
-                    $image = uploadImage("image","../images/");
+                    $upload = uploadMedia("image", "../images/");
+                    $file_path = $upload['file_path'];
+                    $file_type = $upload['file_type'];
 
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`image`,`author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$image}','{$author}','{$featured}' ,'{$user_id}')";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -92,7 +93,7 @@
                             <div class="row mb-2">
                                 <label for="description" class="col-sm-4 col-form-label">Content</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="description" name="description" rows="15"
+                                    <textarea class="form-control" id="description" name="description" rows="13"
                                         required></textarea>
                                 </div>
                             </div>
@@ -117,7 +118,7 @@
                             <div class="row mb-2">
 
                                 <div class="col-sm-8">
-                                    <input type="submit" id="submit" class="btn btn-success btn-block">
+                                    <input type="submit" id="submit" value="Publish" class="btn btn-success btn-block">
                                 </div>
                             </div>
 
@@ -129,6 +130,7 @@
             </section>
 
         </div>
+        <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

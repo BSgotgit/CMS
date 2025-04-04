@@ -1,6 +1,6 @@
 <?php
 
-function uploadImage($fileInputName, $target_dir = "images/")
+function uploadMedia($fileInputName, $target_dir = "images/")
 {
     // Check if file is uploaded
     if (!isset($_FILES[$fileInputName]) || $_FILES[$fileInputName]['error'] !== UPLOAD_ERR_OK) {
@@ -45,5 +45,3 @@ function uploadImage($fileInputName, $target_dir = "images/")
         return false;
     }
 }
-
-?>

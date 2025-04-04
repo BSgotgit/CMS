@@ -5,44 +5,51 @@
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
 
-    <!--?php include 'include/external.php'; ?-->
-
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include './include/dbconnect.php';
 
-        $query = "SELECT * FROM users WHERE email = '{$_POST['email']}' AND password = '{$_POST['password']}' ";
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $query = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            session_start();
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['gender'] = $row['gender'];
-            $_SESSION['date'] = $row['date'];
-            $_SESSION['password'] = $row['password'];
+            // To verify the entered password with the hashed password from the database
+            if (password_verify($password, $row['password'])) {
+                session_start();
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['gender'] = $row['gender'];
+                $_SESSION['date'] = $row['date'];
 
-            header("Location: user.php");
-            $conn->close();
-            exit();
+                if ($row['role'] == 'admin') {
+                    $_SESSION['admin_logged_in'] = true;
+                    header("Location: dashboard.php");
+                } else {
+                    header("Location: user.php");
+                }
+                exit();
+            }
         }
+        $conn->close();
     }
 
     include 'include/menubar.php';
-
     ?>
 
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row justify-content-center mt-5">
 
             <!-- LOGIN FORM -->
@@ -81,6 +88,7 @@
         </div>
     </div>
 
+    <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

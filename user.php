@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <?php
   include 'include/validate_user.php';
@@ -17,7 +17,7 @@
   ?>
   <br>
 
-  <div class="container">
+  <div class="container flex-grow-1">
     <div class="row">
 
       <!--   LEFT SIDE MAIN POSTS  -->
@@ -36,7 +36,16 @@
                   <div class="card-body">
                       <div class="row">
                           <div class="col-lg-12">
-                              <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
+                              <div class="ratio ratio-16x9">';
+
+                    // Check if media is an image or video
+                    if ($row['file_type'] == 'image') {
+                        echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
+                    } elseif ($row['file_type'] == 'video') {
+                        echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
+                    }
+
+echo           '</div>
                           </div>
                           <div class="col-lg-12">
                               <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
@@ -81,7 +90,7 @@
             </div>
             <br><br>
             <div class="row">
-            <span class="card-text"> <b>Joined on :</b> </span><br>
+            <span class="card-text"> <b>Joined on : </b><?php echo $conn->query("SELECT join_date FROM users")->fetch_row()[0]; ?> </span><br>
                 <p class="card-text"> <?php echo $_SESSION['date']?> </p>
               
             </div>
@@ -102,7 +111,7 @@
     </div>
 
   </div>
-
+  <?php include 'include/footer.php'; ?>
 </body>
 
 </html>

@@ -6,14 +6,14 @@
     <script src="include/script.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <?php
     include 'include/menubar.php';
     ?>
     <br>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <div class="row">
 
 
@@ -37,27 +37,36 @@
                 // Fetching/getting each record/row in loop from result set
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="card">
-                            <div class="card-header">
-                                <strong>' . $row['title'] . '</strong>
-                            </div>
+        <div class="card-header">
+            <strong>' . $row['title'] . '</strong>
+        </div>
 
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <img src=" ' . $row['image'] . '" width="100%" alt="..." class="">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
-                                    </div>
-                                </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ratio ratio-16x9">';
+                    // Checking if media is an image or video
+                    if ($row['file_type'] == 'image') {
+                        echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
+                    } elseif ($row['file_type'] == 'video') {
+                        echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
+                    }
 
-                                <div class="row">
-                                    <div class=""> <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a></div>
-                                </div>
+echo           '</div>
+                </div>
+                <div class="col-lg-12">
+                    <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
+                </div>
+            </div>
 
-                            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div><br>';
 
-                        </div> </br>';
                 }
                 ?>
             </section>
