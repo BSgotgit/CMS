@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
             <div class="col-md-3">
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-body">
-                        <h5>Total Posts</h5>
+                        <h5>TODO</h5>
                         <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
                     </div>
                 </div>
