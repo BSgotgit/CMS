@@ -195,6 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                     // button properties
                     $btnClass = $row['published'] == 1 ? "btn-secondary" : "btn-success";
                     $btnText = $row['published'] == 1 ? "Unpublish" : "Approve";
+                    $btnText_featured = $row['featured'] == 1 ? "Yes" : "No";
 
                     echo "<tr>
                        <td>{$row['post_id']}</td>
@@ -204,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                        <td>{$row['date']}</td>
                        <td>{$row['views']}</td>
                        <td>
-                            {$row['featured']}
+                            {$btnText_featured}
                        </td>
                        <td>
                         <form method='POST' action='modules/toggle_publish.php'>
