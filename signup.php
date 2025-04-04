@@ -81,7 +81,8 @@
                             <div class="row mb-4">
                                 <label for="gender" class="col-sm-4 col-form-label">Gender</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="gender" name="gender">
+                                    <select class="form-control" id="gender" name="gender" required>
+                                        <option value="">--Select--</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>

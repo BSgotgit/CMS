@@ -8,9 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_user'])) {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $role = $_POST['role'];
+    $gender = $_POST['gender'];
 
-    $query = "INSERT INTO users (username, email, password, role)
-        VALUES ('$username', '$email', '$password', '$role')";
+    $query = "INSERT INTO users (username, email, gender, `password`, `role`)
+        VALUES ('$username', '$email','$gender', '$password', '$role')";
 
     if ($conn->query($query) === TRUE) {
         $message = "User added successfully!";
@@ -45,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
 
 <body>
     <nav class="navbar navbar-dark bg-dark px-3">
-        <a href="index.php" class="navbar-brand">CMS Admin</a>
+        <a href="index.php" class="navbar-brand">CMS<span class="ms-4"> Admin</span></a>
+        
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </nav>
 
@@ -90,20 +92,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
         <h3>Add New User</h3>
         <form action="" method="POST" class="mb-4">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="text" name="username" class="form-control" placeholder="Username" required>
                 </div>
                 <div class="col-md-3">
                     <input type="email" name="email" class="form-control" placeholder="Email" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
+                <div class="col-md-2">
+                                    <select class="form-select" id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
                 <div class="col-md-2">
                     <select name="role" class="form-select">
                         <option value="admin">Admin</option>
                         <option value="editor">Editor</option>
-                        <option value="user">User</option>
+                        <option value="viewer">Viewer</option>
                     </select>
                 </div>
                 <div class="col-md-1">
