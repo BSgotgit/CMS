@@ -29,7 +29,7 @@
 
         if ($result->num_rows == 0) {
             // New Account
-            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', 'user', '{$image}')";
+            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', 'viewer', '{$image}')";
             $result = $conn->query($query);
 
             if ($conn->affected_rows > 0) {

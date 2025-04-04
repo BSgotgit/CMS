@@ -31,11 +31,12 @@
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['gender'] = $row['gender'];
                 $_SESSION['date'] = $row['date'];
+                $_SESSION['role'] = $row['role'] ;
 
-                if ($row['role'] == 'admin') {
-                    $_SESSION['admin_logged_in'] = true;
+                if ($row['role'] == 'admin' || $row['role'] == 'editor') {
                     header("Location: dashboard.php");
-                } else {
+                } 
+                else { // Contributer and viewer
                     header("Location: user.php");
                 }
                 exit();

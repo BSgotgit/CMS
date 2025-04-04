@@ -60,14 +60,14 @@
                                         <div class="col-lg-12">
                                             <div class="ratio ratio-16x9">';
 
-                    // Check if media is an image or video
-                    if ($row['file_type'] == 'image') {
-                        echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
-                    } elseif ($row['file_type'] == 'video') {
-                        echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
-                    }
+                            // Check if media is an image or video
+                            if ($row['file_type'] == 'image') {
+                                echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
+                            } elseif ($row['file_type'] == 'video') {
+                                echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
+                            }
 
-echo           '</div>
+                            echo           '</div>
                                         </div>
                                         <div class="col-lg-12">
                                         <p class="card-text">' . substr($row['description'], 0, 150) . '..... 
@@ -126,31 +126,43 @@ echo           '</div>
                 </form>
 
 
-            
+                <!-- FEATURED / RECOMMENDED POSTS -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <strong>Recommended Posts</strong>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 LIMIT 10";
+                        $result = mysqli_query($conn, $query);
 
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '
+                        <a href="readpost.php?pid=' . $row['post_id'] . '" class="text-decoration-none text-dark">
+                            <div class="list-group mb-3 border rounded shadow-sm overflow-hidden">
 
+                                <div class="ratio ratio-16x9">';
 
-                <!--    FEATURED / HIGHLIGHTED POSTS  -->
+                            // Checking if media is an image or video
+                            if ($row['file_type'] == 'image') {
+                                echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover w-100' alt='Post Image'>";
+                            } elseif ($row['file_type'] == 'video') {
+                                echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover w-100' muted></video>";
+                            }
 
-                <?php
+                            echo   '</div>
+                                    
+                                <div class="p-2">
+                                    <h6 class="fw-bold text-center">' . $row['title'] . '</h6>
+                                </div>
+                                    
+                            </div>
+                        </a>';
+                        }
+                        ?>
+                    </div>
+                </div>
 
-                $query = "SELECT `title`, `description` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 5 ";
-
-                //Executing the mysql query
-                $result = mysqli_query($conn, $query);
-
-                // Fetching/getting each record/row in loop from result set
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '
-                       <div class="list-group">
-                       <a href="" class="list-group-item">
-                       <h4 class="list-group-item-heading"> ' . $row['title'] . '</h4>
-                       <p class="list-group-item-text">' . substr($row['description'], 0, 230) . '</p>
-                       </a>
-                       </div> </br>
-                   ';
-                }
-                ?>
             </aside>
 
         </div>

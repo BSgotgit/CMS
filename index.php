@@ -25,10 +25,10 @@
                 // Checking if Category is Selected or Not (in menubar)
 
                 if (isset($_GET['cate'])) {
-                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' ORDER BY `date` DESC ";
+                    $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' AND `published` = '1' ORDER BY `date` DESC ";
                 } else {
                     // SHOWING RECENT 10 POSTS IN HOME PAGE
-                    $query = "SELECT * FROM `posts` ORDER BY `date` DESC LIMIT 10 ";
+                    $query = "SELECT * FROM `posts` WHERE `published` = '1' ORDER BY `date` DESC LIMIT 10 ";
                 }
 
                 // Executing the mysql query
@@ -106,7 +106,7 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 7";
+                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 LIMIT 10";
                         $result = mysqli_query($conn, $query);
 
                         while ($row = mysqli_fetch_assoc($result)) {

@@ -83,13 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
             <div class="col-md-3">
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-body">
-                        <h5>TODO</h5>
-                        <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
+                        <h5>Total Visitors</h5>
+                        <p>56</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <?php if ($role == 'admin'): ?>
         <!-- Add User Section -->
         <h3>Add New User</h3>
         <form action="" method="POST" class="mb-4">
@@ -173,6 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
 
             </tbody>
         </table>
+        <?php endif; ?>
 
         <!-- Recent Posts Section -->
         <h3>Recent Posts</h3>

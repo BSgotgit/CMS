@@ -8,6 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 $logged_in = isset($_SESSION['email']);
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 
 ?>
 
@@ -66,10 +67,9 @@ $logged_in = isset($_SESSION['email']);
                 echo '</ul>';
 
 
-
-                if ($logged_in) {
-                    echo ' 
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                // new post /edit post section
+                if($role == 'contributer' || $role == 'editor'){
+                    echo '<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link me-3" aria-current="page" href="newpost.php">New Post</a>
                             </li>    
@@ -77,8 +77,24 @@ $logged_in = isset($_SESSION['email']);
                             <li class="nav-item">    
                                 <a class="nav-link me-4" aria-current="page" href="manageposts.php">Manage Posts</a>
                             </li>
-                        </ul>   
-                            
+                        </ul> ';
+                }
+
+                // dashboard 
+                if($role == 'admin' || $role == 'editor'){
+                    echo '
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link me-3" aria-current="page" href="dashboard.php">DASHBOARD</a>
+                            </li> 
+                        </ul>
+                    ';
+                }
+
+
+
+                if ($logged_in) {
+                    echo '                       
                             <div class="d-flex text-white " id="user-name">
                               <a href="user.php" style="color: white; text-decoration: none;"> <b> ' . $_SESSION['username'] . '</b> </a>
                             </div> 

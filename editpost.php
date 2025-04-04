@@ -127,15 +127,18 @@
                                        <div class="col-sm-8">
                                            <input type="text" class="form-control" id="author" name="author" value="' . $row['author'] . '" required>
                                        </div>
-                                   </div>
-
-                                  <div class="row mb-2">
+                                   </div>'; 
+                                
+                                   if($role == 'editor' || $role == 'admin') {
+                                    echo '
+                                    <div class="row mb-2">
                                       <div class="col-sm-8">
-                                         <input type="checkbox"  id="featured" name="featured" value="1" ' . $check . '>  Checkin to address as featured.
+                                         <input type="checkbox"  id="featured" name="featured" value="1" ' . $check . '>  Add to Recommended List.
                                       </div>                                
-                                 </div>
-
-                        
+                                 </div>';
+                                }
+                                  
+                                echo '
                                    <div class="row mb-2">
                                        <div class="col-sm-8 offset-sm-4">
                                             <input type="hidden" class="form-control" name="post_id" value="' . $row['post_id'] . '" required>

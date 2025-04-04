@@ -25,8 +25,6 @@
                 // Checking if the form is submitted using POST
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-
-
                     $title = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
@@ -44,7 +42,7 @@
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$user_id}')";
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'0','{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
@@ -105,15 +103,14 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-
-                                <div class="col-sm-8">
-                                    <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address as
-                                    featured.
+                            <?php if ($role == 'editor' || $role == 'admin'): ?>
+                                <div class="row mb-2">
+                                    <div class="col-sm-8">
+                                        <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address as
+                                        featured.
+                                    </div>
                                 </div>
-
-                            </div>
-
+                            <?php endif; ?>
 
                             <div class="row mb-2">
 
