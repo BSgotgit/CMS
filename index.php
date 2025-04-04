@@ -19,11 +19,11 @@
 
             <!--   LEFT SIDE MAIN POSTS  -->
 
-            <section class="col-lg-7">
+            <section class="col-lg-8">
                 <?php
 
                 // Checking if Category is Selected or Not (in menubar)
-                
+
                 if (isset($_GET['cate'])) {
                     $query = "SELECT * FROM `posts` WHERE category='$_GET[cate]' ORDER BY `date` DESC ";
                 } else {
@@ -37,14 +37,14 @@
                 // Fetching/getting each record/row in loop from result set
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="card">
-        <div class="card-header">
-            <strong>' . $row['title'] . '</strong>
-        </div>
+                <div class="card-header">
+                    <strong>' . $row['title'] . '</strong>
+                </div>
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ratio ratio-16x9">';
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ratio ratio-16x9">';
                     // Checking if media is an image or video
                     if ($row['file_type'] == 'image') {
                         echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' alt='Post Image'>";
@@ -52,21 +52,20 @@
                         echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
                     }
 
-echo           '</div>
+                    echo           '</div>
+                        </div>
+                        <div class="col-lg-12">
+                            <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
+                        </div>
+                    </div>
+                        
+                    <div class="row">
+                        <div class="col">
+                            <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-12">
-                    <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <a href="readpost.php?pid=' . $row['post_id'] . '" class="btn btn-secondary">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div><br>';
-
+            </div><br>';
                 }
                 ?>
             </section>
@@ -74,7 +73,7 @@ echo           '</div>
 
             <!--   RIGHT SIDE CONTENTS  -->
 
-            <aside class="col-lg-5">
+            <aside class="col-lg-4">
 
                 <!--     SEARCH BOX  -->
 
@@ -99,30 +98,43 @@ echo           '</div>
                 </form>
 
 
- 
-                <!--    FEATURED / HIGHLIGHTED POSTS  -->
 
-                <?php
+                <!-- FEATURED / RECOMMENDED POSTS -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <strong>Recommended Posts</strong>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 7";
+                        $result = mysqli_query($conn, $query);
 
-                $query = "SELECT `post_id`,`title`, `description` FROM `posts` WHERE `featured` = 1 ORDER BY `date` DESC LIMIT 5 ";
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '
+                        <a href="readpost.php?pid=' . $row['post_id'] . '" class="text-decoration-none text-dark">
+                            <div class="list-group mb-3 border rounded shadow-sm overflow-hidden">
 
-                //Executing the mysql query
-                $result = mysqli_query($conn, $query);
+                                <div class="ratio ratio-16x9">';
 
-                // Fetching/getting each record/row in loop from result set
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '
-                       <div class="list-group">
-                       <a href="readpost.php?pid=' . $row['post_id'] . '" class="list-group-item  bg-dark text-white">
-                       <h4 class="list-group-item-heading "> ' . $row['title'] . '</h4>
-                       <p class="list-group-item-text">' . substr($row['description'], 0, 230) . '</p>
-                       </a>
-                       </div> </br>
-                   ';
-                }
-                ?>
+                            // Checking if media is an image or video
+                            if ($row['file_type'] == 'image') {
+                                echo "<img src='{$row['file_path']}' class='img-fluid object-fit-cover w-100' alt='Post Image'>";
+                            } elseif ($row['file_type'] == 'video') {
+                                echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover w-100' muted></video>";
+                            }
 
-
+                            echo   '</div>
+                                    
+                                <div class="p-2">
+                                    <h6 class="fw-bold text-center">' . $row['title'] . '</h6>
+                                </div>
+                                    
+                            </div>
+                        </a>';
+                        }
+                        ?>
+                    </div>
+                </div>
             </aside>
 
         </div>
