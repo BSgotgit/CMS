@@ -87,6 +87,11 @@ echo           '</div>
                <span class="card-text"> <b>Gender</b> </span><br>
                 <p class="card-text"> <?php echo $_SESSION['gender']?> </p>
               </div>
+
+              <div class="col-lg-12 mt-3">
+               <span class="card-text"> <b>Role :</b></span>
+                <p class="card-text"> <?php echo ucfirst($_SESSION['role']);?> </p>
+              </div>
             </div>
             <br><br>
             <div class="row">
