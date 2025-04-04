@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
         $message = "Error updating role: " . $conn->error;
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
 <body>
     <nav class="navbar navbar-dark bg-dark px-3">
         <a href="index.php" class="navbar-brand">CMS<span class="ms-4"> Admin</span></a>
-        
+
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </nav>
 
@@ -73,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
             <div class="col-md-3">
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-body">
-                        <h5>Total Posts</h5>
-                        <p><?php echo $conn->query("SELECT COUNT(*) FROM posts")->fetch_row()[0]; ?></p>
+                        <h5>Total Views</h5>
+                        <p><?php echo $conn->query("SELECT SUM(views) FROM posts")->fetch_row()[0]; ?></p>
                     </div>
                 </div>
             </div>
@@ -102,17 +104,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
                 <div class="col-md-2">
-                                    <select class="form-select" id="gender" name="gender" required>
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
                 <div class="col-md-2">
                     <select name="role" class="form-select">
                         <option value="admin">Admin</option>
                         <option value="editor">Editor</option>
+                        <option value="contributer">Contributer</option>
                         <option value="viewer">Viewer</option>
                     </select>
                 </div>
@@ -152,13 +155,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                                         <option value='admin' " . ($userRole == 'admin' ? 'selected' : '') . ">Admin</option>
                                         <option value='editor' " . ($userRole == 'editor' ? 'selected' : '') . ">Editor</option>
                                         <option value='contributer' " . ($userRole == 'contributer' ? 'selected' : '') . ">Contributer</option>
-                                        <option value='user' " . ($userRole == 'user' ? 'selected' : '') . ">User</option>
+                                        <option value='viewer' " . ($userRole == 'viewer' ? 'selected' : '') . ">Viewer</option>
                                     </select>
                                     <button type='submit' name='update_role' class='btn btn-warning btn-sm'>Update</button>
                                 </form> 
                             </td>
                             <td>
-                                <form method='POST' class='d-flex'>
+                                <form method='POST' class='d-flex' action='modules/delete_user.php'>
                                     <input type='hidden' name='user_id' value='{$row['user_id']}'>
                                     <button type='submit' name='remove_user' class='btn btn-danger btn-sm'>Remove</button>
                                 </form> 
@@ -181,12 +184,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                     <th>Category</th>
                     <th>Author</th>
                     <th>Date</th>
+                    <th>Views</th>
+                    <th>Recommended</th>
+                    <th>Published</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $result = $conn->query("SELECT * FROM posts ORDER BY date DESC LIMIT 7");
+                $result = $conn->query("SELECT * FROM posts ORDER BY date DESC LIMIT 10");
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
                         <td>{$row['post_id']}</td>
@@ -194,6 +200,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                         <td>{$row['category']}</td>
                         <td>{$row['author']}</td>
                         <td>{$row['date']}</td>
+                        <td>{$row['views']}</td>
+                        <td>{$row['featured']}</td>
+                        <td>{$row['published']}</td>
                         <td>
                             <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
                             <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>

@@ -7,6 +7,7 @@ if (isset($_POST['comment']) && isset($_POST['pid']) && isset($_SESSION['user_id
     $query = "INSERT INTO comments(post_id, user_id, comment) VALUES ('{$_POST['pid']}','{$_SESSION['user_id']}' , '{$_POST['comment']}' )";
     $conn->query($query);
 }
+
 ?>
 
 
@@ -28,17 +29,17 @@ if (isset($_POST['comment']) && isset($_POST['pid']) && isset($_SESSION['user_id
             <section class="col-lg-12">
 
                 <?php
-
                 $post_id = $_GET['pid'];
-                // Selecting only one post
-
-                $sel_sql = "SELECT * FROM `posts` WHERE post_id = '$post_id]'";
-                $runs_sql = mysqli_query($conn, $sel_sql);
-
+    
+                $query = "SELECT * from `posts` WHERE `post_id` = '{$post_id}' ";
+                $result = $conn->query($query);
+                
                 // Fetching single row
-                $row = mysqli_fetch_assoc($runs_sql);
+                if ($row = $result->fetch_assoc()) {
+                    // Update Views
+                    $views = $row['views'] + 1 ;
+                    $conn->query("UPDATE posts SET views = '{$views}' WHERE post_id = '{$post_id}' ");
 
-                if ($row) { // Checking if the post exists
                     echo '
                 <div class="card">
                     <div class="card-header">
