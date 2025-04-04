@@ -47,11 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark px-3">
-        <a href="index.php" class="navbar-brand">CMS<span class="ms-4"> Admin</span></a>
-
-        <a href="logout.php" class="btn btn-danger">Logout</a>
-    </nav>
+    <?php include 'include/menubar.php';  ?>
 
     <div class="container mt-4">
         <h2>Dashboard</h2>
