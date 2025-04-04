@@ -133,7 +133,7 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 LIMIT 10";
+                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 AND `published` = '1' LIMIT 10";
                         $result = mysqli_query($conn, $query);
 
                         while ($row = mysqli_fetch_assoc($result)) {
