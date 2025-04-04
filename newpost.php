@@ -42,7 +42,9 @@
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'0','{$user_id}')";
+                    $published = ($role == 'editor' || $roll == 'admin') ?1:0;
+
+                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$published}','{$user_id}')";
 
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
