@@ -15,3 +15,4 @@ if ($role != 'admin' && $role != 'editor'){
     header("Location: user.php");
     exit();
 }
+?>

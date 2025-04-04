@@ -49,3 +49,4 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
         return false;
     }
 }
+?>
