@@ -91,60 +91,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
         </div>
 
         <?php if ($role == 'admin'): ?>
-        <!-- Add User Section -->
-        <h3>Add New User</h3>
-        <form action="" method="POST" class="mb-4">
-            <div class="row">
-                <div class="col-md-2">
-                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+            <!-- Add User Section -->
+            <h3>Add New User</h3>
+            <form action="" method="POST" class="mb-4">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="gender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="role" class="form-select">
+                            <option value="admin">Admin</option>
+                            <option value="editor">Editor</option>
+                            <option value="contributer">Contributer</option>
+                            <option value="viewer">Viewer</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" name="add_user" class="btn btn-primary">Add</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email" required>
-                </div>
-                <div class="col-md-2">
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
-                </div>
-                <div class="col-md-2">
-                    <select class="form-select" id="gender" name="gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="role" class="form-select">
-                        <option value="admin">Admin</option>
-                        <option value="editor">Editor</option>
-                        <option value="contributer">Contributer</option>
-                        <option value="viewer">Viewer</option>
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <button type="submit" name="add_user" class="btn btn-primary">Add</button>
-                </div>
-            </div>
-        </form>
+            </form>
 
-        <!-- User Management Section -->
-        <h3>Manage Users</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Change Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $result = $conn->query("SELECT * FROM users");
-                while ($row = $result->fetch_assoc()) {
-                    $userRole = $row['role']; // current role
-                    echo "<tr>
+            <!-- User Management Section -->
+            <h3>Manage Users</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Change Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $result = $conn->query("SELECT * FROM users");
+                    while ($row = $result->fetch_assoc()) {
+                        $userRole = $row['role']; // current role
+                        echo "<tr>
                             <td>{$row['user_id']}</td>
                             <td>{$row['username']}</td>
                             <td>{$row['email']}</td>
@@ -169,11 +169,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                             </td>
 
                         </tr> ";
-                }
-                ?>
+                    }
+                    ?>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         <?php endif; ?>
 
         <!-- Recent Posts Section -->
@@ -196,22 +196,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                 <?php
                 $result = $conn->query("SELECT * FROM posts ORDER BY date DESC LIMIT 10");
                 while ($row = $result->fetch_assoc()) {
+                    // button properties
+                    $btnClass = $row['published'] == 1 ? "btn-secondary" : "btn-success";
+                    $btnText = $row['published'] == 1 ? "Unpublish" : "Approve";
+
                     echo "<tr>
-                        <td>{$row['post_id']}</td>
-                        <td>{$row['title']}</td>
-                        <td>{$row['category']}</td>
-                        <td>{$row['author']}</td>
-                        <td>{$row['date']}</td>
-                        <td>{$row['views']}</td>
-                        <td>{$row['featured']}</td>
-                        <td>{$row['published']}</td>
-                        <td>
-                            <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
-                            <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
-                        </td>
-                    </tr>";
+                       <td>{$row['post_id']}</td>
+                       <td>{$row['title']}</td>
+                       <td>{$row['category']}</td>
+                       <td>{$row['author']}</td>
+                       <td>{$row['date']}</td>
+                       <td>{$row['views']}</td>
+                       <td>
+                            {$row['featured']}
+                       </td>
+                       <td>
+                        <form method='POST' action='modules/toggle_publish.php'>
+                        <input type='hidden' name='post_id' value='{$row['post_id']}'>
+                            <button type='submit' name='toggle_publish' class='btn btn-sm {$btnClass}'>{$btnText}</button>
+                       </form>
+                    </td>
+                    <td>
+                  <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
+                  <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                </td>
+                   </tr>";
                 }
                 ?>
+
             </tbody>
         </table>
     </div>
