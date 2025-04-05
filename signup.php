@@ -23,7 +23,8 @@
 
         include 'include/upload_media.php';
         $image = uploadMedia("profile_pic", "../images/profile/");
-
+        $image_path = ($image) ? $image['file_path'] : '';
+        
         include './include/dbconnect.php';
 
         // Getting Default Role
@@ -34,7 +35,8 @@
 
         if ($result->num_rows == 0) {
             // New Account
-            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', '{$default_role}', '{$image}')";
+            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', '{$default_role}', '{$image_path}')";
+            
             $result = $conn->query($query);
 
             if ($conn->affected_rows > 0) {
