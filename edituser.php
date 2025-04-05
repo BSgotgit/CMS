@@ -23,8 +23,9 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
-        $image = uploadMedia("profile_pic", "../images/profile/");
 
+        $image = uploadMedia("profile_pic", "../images/profile/");
+        
         include 'include/menubar.php';
         include './include/dbconnect.php';
 
@@ -35,7 +36,7 @@
             $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email' WHERE `user_id` = '{$_SESSION['user_id']}'";
         }
         $result = $conn->query($query);
-
+        
         if ($conn->affected_rows > 0) {
             echo '  
                 <div class="d-flex flex-column flex-grow-1 align-items-center mt-5">
