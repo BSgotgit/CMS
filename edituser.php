@@ -11,6 +11,7 @@
 
     <?php
     require 'include/validate_user.php';
+    require 'include/upload_media.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -23,13 +24,17 @@
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $image = uploadMedia("profile_pic", "../images/profile/");
 
         include 'include/menubar.php';
         include './include/dbconnect.php';
 
-
-
-        $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd' WHERE `user_id` = '{$_SESSION['user_id']}'";
+        
+        if($image){
+        $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd', `profile_pic` = '$image' WHERE `user_id` = '{$_SESSION['user_id']}'";
+        }else{
+            $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd' WHERE `user_id` = '{$_SESSION['user_id']}'";
+        }
         $result = $conn->query($query);
 
         if ($conn->affected_rows > 0) {
@@ -104,8 +109,15 @@
                             <div class="row mb-4">
                                 <label for="password" class="col-sm-4 col-form-label">Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="password" name="password"
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Plz enter the password."
                                         value="">
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label for="image" class="col-sm-4 col-form-label">Profile Picture</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control" id="image" name="profile_pic" value="">
                                 </div>
                             </div>
 
