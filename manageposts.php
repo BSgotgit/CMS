@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="include/style.css">
     <script src="include/script.js"></script>
     <script>
-    function confirmDelete() {
-        return confirm('Are you sure you want to delete this post?');
-    }
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this post?');
+        }
     </script>
 </head>
 
@@ -75,7 +75,7 @@
                     } elseif ($row['file_type'] == 'video') {
                         echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
                     }
-                    echo  '</div>
+                    echo '</div>
 
                                 </div>
                     
@@ -139,53 +139,58 @@
                                 <span class="card-text"> <b>Gender</b> </span><br>
                                 <p class="card-text"> <?php echo $_SESSION['gender'] ?> </p>
                             </div>
+                            <div class="col-lg-12 mt-3">
+                                <span class="card-text"> <b>Role :</b></span>
+                                <p class="card-text"> <?php echo ucfirst($_SESSION['role']); ?> </p>
+                            </div>
                         </div>
 
                         <br><br>
                         <div class="row">
-                            <span class="card-text"> <b>Joined on :</b> <?php echo $conn->query("SELECT join_date FROM users")->fetch_row()[0]; ?> </span><br>
+                            <span class="card-text"> <b>Joined on :</b>
+                                <?php echo $conn->query("SELECT join_date FROM users")->fetch_row()[0]; ?> </span><br>
                             <p class="card-text"> <?php echo $_SESSION['date'] ?> </p>
                         </div>
                     </div>
                 </div>
 
-                    <!-- Filter Category -->
+                <!-- Filter Category -->
 
-                    <br>
-                    <div class="card">
-                        <div class="card-header">Filter Category</div>
-                        <div class="card-body">
-                            <div class="d-flex flex-wrap gap-2">
+                <br>
+                <div class="card">
+                    <div class="card-header">Filter Category</div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2">
 
-                                <?php
-                                $query = "SELECT DISTINCT `category` FROM posts WHERE user_id={$_SESSION['user_id']}" ;
-                                $result = mysqli_query($conn, $query);
+                            <?php
+                            $query = "SELECT DISTINCT `category` FROM posts WHERE user_id={$_SESSION['user_id']}";
+                            $result = mysqli_query($conn, $query);
 
-                                // Color classes
-                                $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
-                                $index = 0; // Index to track colors
-                                
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $colorClass = $colors[$index % count($colors)];
-                                    $index++; // Moving to the next color
-                                
-                                    echo '
+                            // Color classes
+                            $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                            $index = 0; // Index to track colors
+                            
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $colorClass = $colors[$index % count($colors)];
+                                $index++; // Moving to the next color
+                            
+                                echo '
                                     <form action="manageposts.php" method="GET">
                                        <input type="hidden" name="cate" value="' . $row['category'] . '">
                                        <button type="submit" class="btn btn-' . $colorClass . ' btn-sm">' . $row['category'] . '</button>
                                     </form>
                                 ';
-                                }
-                                ?>
-                            </div>
+                            }
+                            ?>
                         </div>
                     </div>
-
                 </div>
 
-            </aside>
-
         </div>
+
+        </aside>
+
+    </div>
     <?php include 'include/footer.php'; ?>
 </body>
 
