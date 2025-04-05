@@ -10,20 +10,19 @@
 
     <?php
     include 'include/validate_user.php';
-    include 'include/menubar.php';
+   
     include 'include/upload_media.php';
     ?>
-    <br>
+   
 
-    <div class="container flex-grow-1">
-        <div class="row">
-
-            <section class="col-lg-12">
-
+    
                 <?php
 
                 // Checking if the form is submitted using POST
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                    include 'include/dbconnect.php';
+
 
                     $title = $_POST['title'];
                     $description = $_POST['description'];
@@ -49,14 +48,21 @@
                     // Executing the mysql query
                     $result = mysqli_query($conn, $query);
 
+                    include 'include/menubar.php';
+
                     // Checking if row inserted
                     if ($conn->affected_rows > 0) {
+
+                        
                         echo '
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Post Created Successfully.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     } else {
+                       
+                        
+
                         echo '
                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             Post creation failed
@@ -64,9 +70,16 @@
                         </div>';
                     }
                 }
+                else{
+                    include 'include/menubar.php';
+                }
 
                 ?>
 
+        <div class="container flex-grow-1">
+          <div class="row">
+
+            <section class="col-lg-12">
 
 
                 <!--   New Post Form  -->
@@ -136,8 +149,9 @@
 
 
             </section>
-
-        </div>
+    
+         </div>
+       </div> 
         <?php include 'include/footer.php'; ?>
 </body>
 
