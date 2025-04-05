@@ -44,6 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="include/style.css">
+    <script>
+        function confirmDeletepost() {
+            return confirm('Are you sure you want to delete this post?');
+        }
+        function confirmDeleteuser() {
+            return confirm('Are you sure you want to remove this user?');
+        }
+    </script>
 </head>
 
 <body>
@@ -160,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                             <td>
                                 <form method='POST' class='d-flex' action='modules/delete_user.php'>
                                     <input type='hidden' name='user_id' value='{$row['user_id']}'>
-                                    <button type='submit' name='remove_user' class='btn btn-danger btn-sm'>Remove</button>
+                                    <button type='submit' name='remove_user' class='btn btn-danger btn-sm' onclick='return confirmDeleteuser()' >Remove</button>
                                 </form> 
                             </td>
 
@@ -216,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                     <td>
                     <a href='readpost.php?pid={$row['post_id']}' class='btn btn-primary btn-sm'>View</a>
                     <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
-                    <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                    <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'  onclick='return confirmDeletepost()' >Delete</a>
                    </td>
                    </tr>";
                 }
