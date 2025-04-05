@@ -130,8 +130,8 @@
                     <div class="row mb-4 justify-content-center">
                                
                          <div class="col-sm-4 ">
-                             <input type="password" class="form-control " id="password" name="password" value="">
-
+                             <input type="password" class="form-control " id="password" name="password" value="" placeholder=" Enter New Password" >
+                             <br>
                              <input type="submit" class="form-control btn btn-primary" id="submit" name="submit"  value="submit">
                          </div>
                      </div>
