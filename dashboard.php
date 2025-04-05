@@ -214,9 +214,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
                        </form>
                     </td>
                     <td>
-                  <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
-                  <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
-                </td>
+                    <a href='readpost.php?pid={$row['post_id']}' class='btn btn-primary btn-sm'>View</a>
+                    <a href='editpost.php?pid={$row['post_id']}' class='btn btn-warning btn-sm'>Edit</a>
+                    <a href='modules/delete_post.php?pid={$row['post_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                   </td>
                    </tr>";
                 }
                 ?>
