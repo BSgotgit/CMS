@@ -17,3 +17,4 @@ if (isset($_GET['pid'])) {
     header("Location: ../dashboard.php"); // Redirect back to dashboard
     exit();
 }
+?>

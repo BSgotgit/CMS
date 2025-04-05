@@ -17,3 +17,4 @@ if (isset($_POST['remove_user']) && isset($_POST['user_id'])) {
     header("Location: ../dashboard.php"); // Redirect back to dashboard
     exit();
 }
+?>
