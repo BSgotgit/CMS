@@ -22,8 +22,11 @@
         $pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         include 'include/upload_media.php';
+
+        
         $image = uploadMedia("profile_pic", "../images/profile/");
-        $image_path = ($image) ? $image['file_path'] : '';
+        $image_path = ($image) ? $image['file_path'] : './icons/default_profile.jpg';
+        
         
         include './include/dbconnect.php';
 
