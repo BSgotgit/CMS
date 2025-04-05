@@ -35,9 +35,9 @@
                         $featured = 0;
                     }
 
-                    $upload = uploadMedia("image", "../images/");
-                    $file_path = $upload['file_path'];
-                    $file_type = $upload['file_type'];
+                    $media = uploadMedia("image", "../images/");
+                    $file_path = $media['file_path'];
+                    $file_type = $media['file_type'];
 
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
