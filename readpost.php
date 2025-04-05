@@ -71,6 +71,7 @@ if (isset($_POST['comment']) && isset($_POST['pid']) && isset($_SESSION['user_id
                                     <br>
                                     <span>' . $row['date'] . '</span>
                                 </p>
+                                <p class="card-text"><b>Views : </b><span>' . $row['views'] . '</span></p> 
                             </div>
                         </div>
                     </div>
