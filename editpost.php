@@ -28,23 +28,15 @@
                     $title = $_POST['title'];
                     $category = $_POST['category'];
                     $description = $_POST['description'];
-
                     $author = $_POST['author'];
 
-                    $image = uploadMedia("image", "../images/");
+                    $media = uploadMedia("image", "../images/");
+                    $featured = isset($_POST['featured']) ? $_POST['featured'] : 0;
 
-
-
-                    if (isset($_POST['featured'])) {
-                        $featured = $_POST['featured'];
-                    } else {
-                        $featured = 0;
-                    }
-
-
-                    if ($image) {
+                    if ($media) {
                         $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
-                        `image` = '$image', `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
+                        `file_path` = '{$media['file_path']}',`file_type` = '{$media['file_type']}', 
+                        `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";
                     } else {
                         $query = "UPDATE `posts` SET `title` = '$title', `category` = '$category', `description` = '$description', 
                         `author` = '$author',`featured` ='$featured' WHERE `post_id` = '$post_id'";

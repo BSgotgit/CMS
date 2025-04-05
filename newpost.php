@@ -35,14 +35,14 @@
                         $featured = 0;
                     }
 
-                    $upload = uploadMedia("image", "../images/");
-                    $file_path = $upload['file_path'];
-                    $file_type = $upload['file_type'];
+                    $media = uploadMedia("image", "../images/");
+                    $file_path = $media['file_path'];
+                    $file_type = $media['file_type'];
 
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $published = ($role == 'editor' || $roll == 'admin') ?1:0;
+                    $published = ($role == 'editor' || $roll == 'admin') ? 1 : 0;
 
                     $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$published}','{$user_id}')";
 
@@ -87,9 +87,18 @@
                             <div class="row mb-2">
                                 <label for="category" class="col-sm-4 col-form-label">Category</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="category" name="category" required>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <option value="">Select a Category</option>
+                                        <?php
+                                        $result = $conn->query("SELECT * FROM category");
+                                        while ($cat = $result->fetch_assoc()) {
+                                            echo "<option value='{$cat['name']}'>{$cat['name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="row mb-2">
                                 <label for="description" class="col-sm-4 col-form-label">Content</label>
                                 <div class="col-sm-8">

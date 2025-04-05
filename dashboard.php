@@ -224,6 +224,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
 
             </tbody>
         </table>
+
+
+        <!-- Settings Section -->
+        <?php if ($role == 'admin'): ?>
+
+            <?php
+            $default_role = $conn->query("SELECT setting_value FROM settings WHERE setting_key = 'default_role' ")->fetch_row()[0];
+            ?>
+
+            <h3>Settings: </h3>
+            <!-- Default Role Settings -->
+            <div class="card p-3 mb-3" style="max-width: 600px;">
+                <h5>Default Role</h5>
+                <form method="POST" class="d-flex">
+                    <select name="default_role" class="form-select me-2">
+                        <option value="viewer" <?= $default_role == 'viewer' ? 'selected' : '' ?>>Viewer</option>
+                        <option value="contributer" <?= $default_role == 'contributer' ? 'selected' : '' ?>>Contributer</option>
+                    </select>
+                    <button type="submit" name="update_default_role" class="btn btn-warning btn-sm">Update</button>
+                </form>
+            </div>
+
+
+            <!-- Settings End -->
+
+            <!-- Category Management -->
+            <div class="card p-3 mb-5" style="max-width: 600px;">
+                <h5>Manage Categories</h5>
+
+                <!-- Add New Category Form -->
+                <form action="modules/add_category.php" method="POST" class="d-flex mb-3">
+                    <input type="text" name="category_name" class="form-control me-2" placeholder="New Category" required>
+                    <button type="submit" name="add_category" class="btn btn-primary btn-sm">Add</button>
+                </form>
+
+                <!-- Display Categories -->
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $result = $conn->query("SELECT * FROM category");
+                        while ($cat = $result->fetch_assoc()) {
+                            echo "<tr>
+                        <td>{$cat['id']}</td>
+                        <td>{$cat['name']}</td>
+                        <td>
+                            <form method='POST' action='modules/delete_category.php' style='display:inline;'>
+                                <input type='hidden' name='category_id' value='{$cat['id']}'>
+                                <button type='submit' name='delete_category' class='btn btn-danger btn-sm'>Delete</button>
+                            </form>
+                        </td>
+                      </tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+
     </div>
 </body>
 
