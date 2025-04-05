@@ -23,7 +23,6 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
-        $pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $image = uploadMedia("profile_pic", "../images/profile/");
 
         include 'include/menubar.php';
@@ -31,9 +30,9 @@
 
         
         if($image){
-        $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd', `profile_pic` = '$image' WHERE `user_id` = '{$_SESSION['user_id']}'";
+        $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `profile_pic` = '$image' WHERE `user_id` = '{$_SESSION['user_id']}'";
         }else{
-            $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email', `password` = '$pwd' WHERE `user_id` = '{$_SESSION['user_id']}'";
+            $query = "UPDATE `users` SET `username` = '$name',`gender`='$gender', `email` = '$email' WHERE `user_id` = '{$_SESSION['user_id']}'";
         }
         $result = $conn->query($query);
 
@@ -105,15 +104,6 @@
                                 document.getElementById("gender").value = "<?= $_SESSION['gender'] ?>";
                             </script>
 
-
-                            <div class="row mb-4">
-                                <label for="password" class="col-sm-4 col-form-label">Password</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Plz enter the password."
-                                        value="">
-                                </div>
-                            </div>
-
                             <div class="row mb-4">
                                 <label for="image" class="col-sm-4 col-form-label">Profile Picture</label>
                                 <div class="col-sm-8">
@@ -130,7 +120,42 @@
                         </div>
                     </div>
                 </form>
+                
+        
+                <?php
+                     if($_SERVER['REQUEST_METHOD'] == 'GET' && isset( $_GET['pwd_change']) ) {
 
+                        echo '
+                 <form action="change_pwd.php?uid='.$_SESSION['user_id'].'" method="post">
+                    <div class="row mb-4 justify-content-center">
+                               
+                         <div class="col-sm-4 ">
+                             <input type="password" class="form-control " id="password" name="password" value="">
+
+                             <input type="submit" class="form-control btn btn-primary" id="submit" name="submit"  value="submit">
+                         </div>
+                     </div>
+                </form>
+                        
+                        ';
+                     }
+                     else {
+
+                        echo '
+                 <form action="edituser.php" method="get">
+                    <div class="row mb-4 justify-content-center">
+                               
+                         <div class="col-sm-4 ">
+                             <input type="submit" class="form-control btn btn-secondary" id="pwd_change" name="pwd_change" 
+                                 value="Change password">
+                         </div>
+                   </div>
+                </form>
+                        
+                        ';
+                     }
+                
+                ?>
 
             </section>
 
