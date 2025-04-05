@@ -31,7 +31,7 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
     }
 
     // File size limit (Images: 10MB, Videos: 500MB)
-    if (($type === "image" && $_FILES[$fileInputName]["size"] > 10 * 1024 * 1024) ||
+    if (($type === "image" && $_FILES[$fileInputName]["size"] > 100 * 1024 * 1024) ||
         ($type === "video" && $_FILES[$fileInputName]["size"] > 500 * 1024 * 1024)
     ) {
         echo "Sorry, your file is too large.";
