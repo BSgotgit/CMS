@@ -45,7 +45,7 @@
                         echo "<video src='{$row['file_path']}' class='img-fluid object-fit-cover rounded' controls></video>";
                     }
 
-echo           '</div>
+          echo         '</div>
                           </div>
                           <div class="col-lg-12">
                               <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
