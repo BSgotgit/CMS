@@ -26,12 +26,15 @@
 
         include './include/dbconnect.php';
 
+        // Getting Default Role
+        $default_role = $conn->query("SELECT setting_value FROM settings WHERE setting_key = 'default_role' ")->fetch_row()[0];
+
         $query = "SELECT * FROM users WHERE email = '{$email}' ";
         $result = $conn->query($query);
 
         if ($result->num_rows == 0) {
             // New Account
-            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', 'viewer', '{$image}')";
+            $query = "INSERT INTO users(username, gender, email, `password`, `role`, profile_pic) VALUES ('{$name}', '{$gender}', '{$email}', '{$pwd}', '{$default_role}', '{$image}')";
             $result = $conn->query($query);
 
             if ($conn->affected_rows > 0) {

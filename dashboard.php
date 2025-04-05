@@ -237,12 +237,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_role'])) {
             <!-- Default Role Settings -->
             <div class="card p-3 mb-3" style="max-width: 600px;">
                 <h5>Default Role</h5>
-                <form method="POST" class="d-flex">
+                <form method="POST" class="d-flex" action="modules/update_default_role.php">
                     <select name="default_role" class="form-select me-2">
                         <option value="viewer" <?= $default_role == 'viewer' ? 'selected' : '' ?>>Viewer</option>
                         <option value="contributer" <?= $default_role == 'contributer' ? 'selected' : '' ?>>Contributer</option>
                     </select>
-                    <button type="submit" name="update_default_role" class="btn btn-warning btn-sm">Update</button>
+                    <button type="submit" class="btn btn-warning btn-sm">Update</button>
                 </form>
             </div>
 
