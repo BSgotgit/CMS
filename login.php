@@ -32,6 +32,7 @@
                 $_SESSION['gender'] = $row['gender'];
                 $_SESSION['date'] = $row['date'];
                 $_SESSION['role'] = $row['role'] ;
+                $_SESSION['profile_pic'] = $row['profile_pic'] ;
 
                 if ($row['role'] == 'admin' || $row['role'] == 'editor') {
                     header("Location: dashboard.php");

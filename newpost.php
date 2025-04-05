@@ -42,7 +42,7 @@
                     $user_id = $_SESSION['user_id'];
                     $author = $_SESSION['username'];
 
-                    $published = ($role == 'editor' || $roll == 'admin') ? 1 : 0;
+                    $published = ($role == 'editor' || $role == 'admin') ? 1 : 0;
 
                     $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$published}','{$user_id}')";
 
