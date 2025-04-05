@@ -18,7 +18,7 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
     $fileMimeType = mime_content_type($_FILES[$fileInputName]["tmp_name"]);
 
     // Allowed file formats
-    $allowedImages = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    $allowedImages = ["image/jpeg", "image/png", "image/gif", "image/webp","image/avif"];
     $allowedVideos = ["video/mp4", "video/webm", "video/avi", "video/mpeg"];
 
     if (in_array($fileMimeType, $allowedImages)) {
@@ -26,7 +26,7 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
     } elseif (in_array($fileMimeType, $allowedVideos)) {
         $type = "video";
     } else {
-        echo "Invalid file type. Only JPG, PNG, GIF, WEBP for images & MP4, WebM, AVI, MPEG for videos.";
+        echo "Invalid file type. Only JPG, PNG, GIF, WEBP, AVIF for images & MP4, WebM, AVI, MPEG for videos.";
         return false;
     }
 
