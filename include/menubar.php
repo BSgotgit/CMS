@@ -68,7 +68,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 
 
                 // new post /edit post section
-                if($role == 'contributer' || $role == 'editor'){
+                if($role == 'contributer' || $role == 'editor' || $role == 'admin') {
                     echo '<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link me-3" aria-current="page" href="newpost.php">New Post</a>
