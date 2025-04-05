@@ -71,6 +71,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-12 mt-2">
+              <!--img src="<?php // echo $_SESSION['profile_pic'] ?>" alt="Profile" width="100px" height="100px" class="rounded-circle" style="object-fit: cover;"-->
                 <h2 class="card-text"><?php echo $_SESSION['username']?></h2>
               </div>
               <br>
