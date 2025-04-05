@@ -83,7 +83,14 @@
                         </div>
                     </div>
                 </form>
-
+              <?php
+              if($_SERVER['REQUEST_METHOD'] == 'POST'){
+               if (password_verify($password, $row['password']) )
+               {// Everythings goes as designed // 
+               }
+               else { echo "Invalid Email or password ,try login again "; }
+               }
+              ?>
             </section>
 
         </div>

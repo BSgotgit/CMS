@@ -13,6 +13,8 @@
     include 'include/menubar.php';
     $email_exist = false;
 
+    error_reporting(0);
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = $_POST['name'];
         $email = $_POST['email'];
