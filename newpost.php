@@ -23,8 +23,9 @@ include 'include/upload_media.php';
         include 'include/dbconnect.php';
 
 
-        $title = $_POST['title'];
-        $description = $_POST['description'];
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
+
         $category = $_POST['category'];
 
         if (isset($_POST['featured'])) {

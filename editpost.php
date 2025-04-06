@@ -24,9 +24,9 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $post_id = $_POST['post_id'];
-                    $title = $_POST['title'];
+                    $title = mysqli_real_escape_string($conn, $_POST['title']);
+                    $description = mysqli_real_escape_string($conn, $_POST['description']);
                     $category = $_POST['category'];
-                    $description = $_POST['description'];
                     $author = $_POST['author'];
                     $media = uploadMedia("image", "../images/");
                     $featured = isset($_POST['featured']) ? $_POST['featured'] : 0;
