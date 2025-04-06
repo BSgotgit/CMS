@@ -18,7 +18,7 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
     $fileMimeType = mime_content_type($_FILES[$fileInputName]["tmp_name"]);
 
     // Allowed file formats
-    $allowedImages = ["image/jpeg", "image/png", "image/gif", "image/webp","image/avif"];
+    $allowedImages = ["image/jpeg", "image/png", "image/gif", "image/webp"];
     $allowedVideos = ["video/mp4", "video/webm", "video/avi", "video/mpeg"];
 
     if (in_array($fileMimeType, $allowedImages)) {
@@ -31,7 +31,7 @@ function uploadMedia($fileInputName, $target_dir = "uploads/")
     }
 
     // File size limit (Images: 10MB, Videos: 500MB)
-    if (($type === "image" && $_FILES[$fileInputName]["size"] > 100 * 1024 * 1024) ||
+    if (($type === "image" && $_FILES[$fileInputName]["size"] > 30 * 1024 * 1024) ||
         ($type === "video" && $_FILES[$fileInputName]["size"] > 500 * 1024 * 1024)
     ) {
         echo "Sorry, your file is too large.";
