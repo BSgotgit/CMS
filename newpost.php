@@ -1,3 +1,9 @@
+<?php
+include 'include/validate_user.php';
+
+include 'include/upload_media.php';
+?>
+
 <html>
 
 <head>
@@ -8,76 +14,64 @@
 
 <body class="d-flex flex-column min-vh-100">
 
+
     <?php
-    include 'include/validate_user.php';
-   
-    include 'include/upload_media.php';
-    ?>
-   
 
-    
-                <?php
+    // Checking if the form is submitted using POST
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                // Checking if the form is submitted using POST
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-                    include 'include/dbconnect.php';
+        include 'include/dbconnect.php';
 
 
-                    $title = $_POST['title'];
-                    $description = $_POST['description'];
-                    $category = $_POST['category'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $category = $_POST['category'];
 
-                    if (isset($_POST['featured'])) {
-                        $featured = $_POST['featured'];
-                    } else {
-                        $featured = 0;
-                    }
+        if (isset($_POST['featured'])) {
+            $featured = $_POST['featured'];
+        } else {
+            $featured = 0;
+        }
 
-                    $media = uploadMedia("image", "../images/");
-                    $file_path = $media['file_path'];
-                    $file_type = $media['file_type'];
+        $media = uploadMedia("image", "../images/");
+        $file_path = $media['file_path'];
+        $file_type = $media['file_type'];
 
-                    $user_id = $_SESSION['user_id'];
-                    $author = $_SESSION['username'];
+        $user_id = $_SESSION['user_id'];
+        $author = $_SESSION['username'];
 
-                    $published = ($role == 'editor' || $role == 'admin') ? 1 : 0;
+        $published = ($role == 'editor' || $role == 'admin') ? 1 : 0;
 
-                    $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$published}','{$user_id}')";
+        $query = "INSERT INTO posts(`title`,`category`,`description`,`file_path`,`file_type`, `author`, `featured`,`published`,`user_id`) 
+        VALUES ('{$title}','{$category}','{$description}','{$file_path}','{$file_type}','{$author}','{$featured}' ,'{$published}','{$user_id}')";
 
-                    // Executing the mysql query
-                    $result = mysqli_query($conn, $query);
+        // Executing the mysql query
+        $result = mysqli_query($conn, $query);
 
-                    include 'include/menubar.php';
+        include 'include/menubar.php';
 
-                    // Checking if row inserted
-                    if ($conn->affected_rows > 0) {
-
-                        
-                        echo '
+        // Checking if row inserted
+        if ($conn->affected_rows > 0) {
+            echo '
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Post Created Successfully.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
-                    } else {
-                       
-                        
-
-                        echo '
+        } else {
+            echo '
                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             Post creation failed
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
-                    }
-                }
-                else{
-                    include 'include/menubar.php';
-                }
+        }
+    } else {
+        include 'include/menubar.php';
+    }
 
-                ?>
+    ?>
 
-        <div class="container flex-grow-1">
-          <div class="row">
+    <div class="container flex-grow-1">
+        <div class="row">
 
             <section class="col-lg-12">
 
@@ -115,7 +109,7 @@
                             <div class="row mb-2">
                                 <label for="description" class="col-sm-4 col-form-label">Content</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="description" name="description" rows="13"
+                                    <textarea class="form-control" id="description" name="description" rows="13" 
                                         required></textarea>
                                 </div>
                             </div>
@@ -130,7 +124,8 @@
                             <?php if ($role == 'editor' || $role == 'admin'): ?>
                                 <div class="row mb-2">
                                     <div class="col-sm-8">
-                                        <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address as
+                                        <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address
+                                        as
                                         featured.
                                     </div>
                                 </div>
@@ -149,10 +144,10 @@
 
 
             </section>
-    
-         </div>
-       </div> 
-        <?php include 'include/footer.php'; ?>
+
+        </div>
+    </div>
+    <?php include 'include/footer.php'; ?>
 </body>
 
 </html>
