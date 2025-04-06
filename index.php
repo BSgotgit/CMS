@@ -54,7 +54,7 @@
 
                     echo           '</div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 mt-2">
                             <p class="card-text">' . substr($row['description'], 0, 190) . '..... </p>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 AND `published` = '1' LIMIT 10";
+                        $query = "SELECT `post_id`, `title`, `file_type`, `file_path` FROM `posts` WHERE `featured` = 1 AND `published` = '1' ORDER BY `date` DESC LIMIT 10";
                         $result = mysqli_query($conn, $query);
 
                         while ($row = mysqli_fetch_assoc($result)) {

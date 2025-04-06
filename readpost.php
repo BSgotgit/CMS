@@ -60,7 +60,7 @@ if (isset($_POST['comment']) && isset($_POST['pid']) && isset($_SESSION['user_id
                     echo  '</div>
 
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mt-4">
                                 <p class="card-text">' . $row['description'] . '</p>
                             </div>
             
