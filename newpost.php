@@ -125,9 +125,7 @@ include 'include/upload_media.php';
                             <?php if ($role == 'editor' || $role == 'admin'): ?>
                                 <div class="row mb-2">
                                     <div class="col-sm-8">
-                                        <input type="checkbox" id="featured" name="featured" value="1"> Checkin to address
-                                        as
-                                        featured.
+                                        <input type="checkbox" id="featured" name="featured" value="1"> Add to Recommended List.
                                     </div>
                                 </div>
                             <?php endif; ?>
